@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.loginFragment"
+    android:background="@color/white"
+    >
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/carbon_cash"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="26dp"
+        android:text="@string/app_name"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ellipse_2"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
+
+    <View
+        android:id="@+id/ellipse_2"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="116dp"
+        android:background="@drawable/ellipse2"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <View
+        android:id="@+id/ellipse_5"
+        android:layout_width="232dp"
+        android:layout_height="223dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/ellipse5"
+        app:layout_constraintBottom_toBottomOf="@+id/ellipse_2"
+        app:layout_constraintEnd_toEndOf="@+id/ellipse_2"
+        app:layout_constraintStart_toStartOf="@+id/ellipse_2"
+        app:layout_constraintTop_toTopOf="@+id/ellipse_2"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="331dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/kakao_login_medium_wide"
+        android:contentDescription="@string/loginkakao"
+        app:layout_constraintBottom_toTopOf="@+id/Logingoogle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/Logingoogle"
+        android:layout_width="343dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/btn_google_signin_dark_pressed_hdpi"
+        android:contentDescription="@string/logingoogle"
+        android:scaleType="centerInside"
+
+        app:layout_constraintBottom_toTopOf="@+id/imageButton3"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logingoogle"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/Logingoogle"
+        app:layout_constraintEnd_toEndOf="@+id/Logingoogle"
+        app:layout_constraintStart_toStartOf="@+id/Logingoogle"
+        app:layout_constraintTop_toTopOf="@+id/Logingoogle"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="331dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="76dp"
+        android:background="@drawable/naverlog"
+        android:contentDescription="@string/loginnaver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

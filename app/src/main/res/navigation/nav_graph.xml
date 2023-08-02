@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/pointStoreFragment"
+        android:name="com.example.carborncash.fragment.pointStoreFragment"
+        android:label="fragment_point_store"
+        tools:layout="@layout/fragment_point_store" />
+    <fragment
+        android:id="@+id/detailappRankFragment"
+        android:name="com.example.carborncash.fragment.detailappRankFragment"
+        android:label="fragment_detailapp_rank"
+        tools:layout="@layout/fragment_detailapp_rank" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.carborncash.fragment.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_carbonRankFragment"
+            app:destination="@id/carbonRankFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_pointStoreFragment"
+            app:destination="@id/pointStoreFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_appRankFragment"
+            app:destination="@id/appRankFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/carbonRankFragment"
+        android:name="com.example.carborncash.fragment.carbonRankFragment"
+        android:label="fragment_carbon_rank"
+        tools:layout="@layout/fragment_carbon_rank" />
+    <fragment
+        android:id="@+id/appRankFragment"
+        android:name="com.example.carborncash.fragment.appRankFragment"
+        android:label="fragment_app_rank"
+        tools:layout="@layout/fragment_app_rank" >
+        <action
+            android:id="@+id/action_appRankFragment_to_detailappRankFragment"
+            app:destination="@id/detailappRankFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.carborncash.fragment.loginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+</navigation>
