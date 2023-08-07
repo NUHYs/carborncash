@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools" >
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
+<<<<<<< HEAD
+=======
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+>>>>>>> cc0e503 (Initial commit)
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
