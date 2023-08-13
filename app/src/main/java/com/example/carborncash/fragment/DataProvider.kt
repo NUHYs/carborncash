@@ -59,7 +59,6 @@ class DataProvider {
             val appUsageMap = mutableMapOf<String, Double>()
             val bucket = NetworkStats.Bucket()
 
-
             val wifiStats = networkStatsManager.queryDetails(ConnectivityManager.TYPE_WIFI, "", startOfToday, endOfToday)
             val mobileStats = networkStatsManager.queryDetails(ConnectivityManager.TYPE_MOBILE, "", startOfToday, endOfToday)
 
@@ -69,27 +68,19 @@ class DataProvider {
                 } else {
                     mobileStats.getNextBucket(bucket)
                 }
-                Log.d("aaaaaa", "GGGGGGG $wifiStats")
-                Log.d("aaaaaa", "HHHHHHHH $mobileStats")
-
 
                 val uid = bucket.uid
                 val packageNames = getPackageNamesFromUid(context, uid)
-                Log.d("aaaaaa", "aaaa $packageNames")
 
                 packageNames?.forEach { packageName ->
                     val appInfo = getAppInfo(context, packageName)
-                    Log.d("aadaaaa", "$appInfo")
                     val appName = appInfo?.loadLabel(context.packageManager).toString()
 
                     val downloads = bucket.rxBytes
                     val uploads = bucket.txBytes
                     val totalUsageInKB = (downloads + uploads) / (1024 * 1024.0) // MB
-                    Log.d("aaaaaa", "cccccc $appName $totalUsageInKB")
 
                     appUsageMap[appName] = appUsageMap.getOrDefault(appName, 0.0) + totalUsageInKB
-
-
                 }
             }
 
@@ -123,48 +114,65 @@ class DataProvider {
         }
 
         @RequiresApi(Build.VERSION_CODES.M)
-        fun getUsage(context: Context, start: Long, end: Long): Map<String, String> {
+        fun getDayUsage(context: Context): String {
+            val c = Calendar.getInstance()
+            c[Calendar.HOUR_OF_DAY] = 0
+            c[Calendar.MINUTE] = 0
+            c[Calendar.SECOND] = 0
+            c[Calendar.MILLISECOND] = 0
+            val startOfToday = c.timeInMillis
+
+            val calendar = Calendar.getInstance()
+            calendar.add(Calendar.DATE, 1)
+            val end = calendar.timeInMillis
+
+            return getUsage(context, startOfToday, end)
+        }
+
+        @RequiresApi(Build.VERSION_CODES.M)
+        fun getUsage(context: Context, start: Long, end: Long): String {
+            var downloads = 0L
+            var uploads = 0L
             val bucket = NetworkStats.Bucket()
             val networkStatsManager =
-                context.getSystemService(Context.NETWORK_STATS_SERVICE) as NetworkStatsManager
+                context.getSystemService(AppCompatActivity.NETWORK_STATS_SERVICE) as NetworkStatsManager
 
-            val pm = context.packageManager
-            val packages = pm.getInstalledApplications(PackageManager.GET_META_DATA)
 
-            val appUsageMap = mutableMapOf<String, String>()
-            for (packageInfo in packages) {
-                val uid = packageInfo.uid
-                val packageName = packageInfo.packageName
-
-                val stats = networkStatsManager.queryDetails(
-                    ConnectivityManager.TYPE_WIFI,
-                    null,
-                    start,
-                    end
-                )
-
-                var downloads = 0L
-                var uploads = 0L
-
-                while (stats.hasNextBucket()) {
-                    stats.getNextBucket(bucket)
-                    if (bucket.uid == uid) {
-                        downloads += bucket.rxBytes
-                        uploads += bucket.txBytes
-                    }
-                }
-
-                stats.close() // stats.close()를 루프 밖으로 이동
-
-                val resultInMB = (downloads + uploads) / (1024 * 1024.0)
-                appUsageMap[packageName] =
-                    if (resultInMB > 999) {
-                        String.format("%.2f", resultInMB / 1000.0) + " GB"
-                    } else {
-                        String.format("%.0f", resultInMB) + " MB"
-                    }
+            val stats = networkStatsManager.queryDetails(
+                ConnectivityManager.TYPE_WIFI,
+                null,
+                start,
+                end
+            )
+            while (stats.hasNextBucket()) {
+                stats.getNextBucket(bucket)
+                downloads += bucket.rxBytes
+                uploads += bucket.txBytes
             }
-            return appUsageMap
+            val mobilestats = networkStatsManager.queryDetails(
+                ConnectivityManager.TYPE_MOBILE,
+                null,
+                start,
+                end
+            )
+            while (mobilestats.hasNextBucket()) {
+                mobilestats.getNextBucket(bucket)
+                downloads += bucket.rxBytes
+                uploads += bucket.txBytes
+            }
+            val resultInMB = (downloads + uploads) / (1024 * 1024.0)
+            return if (resultInMB > 999) {
+                String.format(
+                    "%.2f",
+                    resultInMB / 1000.0
+                ) + " GB"
+            } else {
+                String.format(
+                    "%.0f",
+                    resultInMB
+                ) + " MB"
+            }
         }
+
     }
 }

@@ -42,7 +42,7 @@ import com.google.firebase.database.ValueEventListener
  * create an instance of this fragment.
  */
 class loginFragment() : Fragment(){
-    // TODO: Rename and change types of parameters
+    // TODO: Rename and change types of parametersvar weekt : Int = 0,
 
     private var _binding : FragmentLoginBinding? = null
     private val binding get() = _binding!!
@@ -64,21 +64,10 @@ class loginFragment() : Fragment(){
         return mode == AppOpsManager.MODE_ALLOWED
     }
 
-    private fun hasPackageUsageStatsPermission2(context: Context): Boolean {
-        return ContextCompat.checkSelfPermission(
-            context,
-            android.Manifest.permission.ACCESS_NETWORK_STATE
-        ) == PackageManager.PERMISSION_GRANTED
-    }
 
     private fun requestPackageUsageStatsPermission() {
         val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
         startActivity(intent)
-    }
-    private val REQUEST_NETWORK_STATE = 123
-    private fun requestNetworkStatePermission() {
-        val permission = arrayOf(android.Manifest.permission.ACCESS_NETWORK_STATE)
-        ActivityCompat.requestPermissions(requireActivity(), permission, REQUEST_NETWORK_STATE)
     }
 
 
@@ -144,7 +133,7 @@ class loginFragment() : Fragment(){
                                 } else {
                                     // 이메일이 존재하지 않으므로 새로운 사용자를 생성
 
-                                    val user = User(useremail, 0, 0, 0)
+                                    val user = User(useremail, 0, 0, 0,0)
                                     database.child(useremail).setValue(user).addOnSuccessListener {
                                         if (hasPackageUsageStatsPermission()) {
                                             findNavController().navigate(R.id.action_loginFragment_to_mainFragment)

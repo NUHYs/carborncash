@@ -58,6 +58,8 @@ class MainFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
+
+
         val user = Firebase.auth.currentUser
         user?.let {
             database = FirebaseDatabase.getInstance().getReference("Users")

@@ -56,7 +56,6 @@ class appRankFragment : Fragment() {
     private var _binding : FragmentAppRankBinding? = null
     private val binding get() = _binding!!
 
-    private val PERMISSION_REQUEST_CODE = 123
 
 
     // TODO: Rename and change types of parameters
@@ -90,7 +89,19 @@ class appRankFragment : Fragment() {
         view.findViewById<View>(R.id.btnGetDataUsage).setOnClickListener {
             binding.btnGetDataUsage.visibility = View.GONE
             val textView = TextView(requireContext())
+            val textView2 = TextView(requireContext())
             val context = requireContext()
+            textView2.text = DataProvider.getDayUsage(context)
+
+            textView2.textSize = 30f
+
+            textView2.setTypeface(null, Typeface.BOLD)
+
+            textView2.id = 2
+
+            textView.setTextColor(Color.BLACK)
+            val linearLayout = binding.listLayout.getChildAt(0) as LinearLayout
+            linearLayout.addView(textView2)
 
             textView.text = DataProvider.getUsageSummary(context).toString()
 
@@ -101,7 +112,6 @@ class appRankFragment : Fragment() {
             textView.id = 1
 
             textView.setTextColor(Color.BLACK)
-            val linearLayout = binding.listLayout.getChildAt(0) as LinearLayout
             linearLayout.addView(textView)
 //            if (!checkUsageStatsPermission()) {
 //                requestUsageStatsPermission()
