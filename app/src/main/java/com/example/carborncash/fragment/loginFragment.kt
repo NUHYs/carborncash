@@ -1,10 +1,13 @@
 package com.example.carborncash.fragment
 
+import android.app.AppOpsManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Parcel
 import android.os.Parcelable
+import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +15,7 @@ import android.view.ViewGroup
 import android.webkit.ServiceWorkerClient
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
@@ -37,7 +41,7 @@ import com.google.firebase.database.ValueEventListener
  * Use the [loginFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class loginFragment() : Fragment(), Parcelable {
+class loginFragment() : Fragment(){
     // TODO: Rename and change types of parameters
 
     private var _binding : FragmentLoginBinding? = null
@@ -48,9 +52,35 @@ class loginFragment() : Fragment(), Parcelable {
 
     private lateinit var database : DatabaseReference
 
-    constructor(parcel: Parcel) : this() {
-
+    private fun hasPackageUsageStatsPermission(): Boolean {
+        val appOps = activity?.getSystemService(Context.APP_OPS_SERVICE) as? AppOpsManager
+        val mode = context?.packageName?.let {
+            appOps?.checkOpNoThrow(
+                AppOpsManager.OPSTR_GET_USAGE_STATS,
+                android.os.Process.myUid(),
+                it
+            )
+        } ?: AppOpsManager.MODE_ERRORED
+        return mode == AppOpsManager.MODE_ALLOWED
     }
+
+    private fun hasPackageUsageStatsPermission2(context: Context): Boolean {
+        return ContextCompat.checkSelfPermission(
+            context,
+            android.Manifest.permission.ACCESS_NETWORK_STATE
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestPackageUsageStatsPermission() {
+        val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+        startActivity(intent)
+    }
+    private val REQUEST_NETWORK_STATE = 123
+    private fun requestNetworkStatePermission() {
+        val permission = arrayOf(android.Manifest.permission.ACCESS_NETWORK_STATE)
+        ActivityCompat.requestPermissions(requireActivity(), permission, REQUEST_NETWORK_STATE)
+    }
+
 
 
     override fun onCreateView(
@@ -62,6 +92,11 @@ class loginFragment() : Fragment(), Parcelable {
         binding.Logingoogle.setOnClickListener(){
             val intent = client.signInIntent
             startActivityForResult(intent, 10001)
+        }
+
+        // 권한 체크 및 요청
+        if (!hasPackageUsageStatsPermission()) {
+            requestPackageUsageStatsPermission()
         }
 
         return binding.root
@@ -76,23 +111,6 @@ class loginFragment() : Fragment(), Parcelable {
         client = GoogleSignIn.getClient(requireActivity(), options)
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<loginFragment> {
-        override fun createFromParcel(parcel: Parcel): loginFragment {
-            return loginFragment(parcel)
-        }
-
-        override fun newArray(size: Int): Array<loginFragment?> {
-            return arrayOfNulls(size)
-        }
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -112,14 +130,30 @@ class loginFragment() : Fragment(), Parcelable {
                         database.child(useremail).addListenerForSingleValueEvent(object :
                             ValueEventListener {
                             override fun onDataChange(snapshot: DataSnapshot) {
+
                                 if (snapshot.exists()) {
+                                    if (hasPackageUsageStatsPermission()) {
+                                        findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+
+                                    } else {
+                                        // ACCESS_NETWORK_STATE 권한이 없는 경우
+                                        requestPackageUsageStatsPermission()
+                                        findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                                    }
                                     // 이메일이 이미 존재하므로 메인 페이지로 이동
-                                    findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
                                 } else {
                                     // 이메일이 존재하지 않으므로 새로운 사용자를 생성
+
                                     val user = User(useremail, 0, 0, 0)
                                     database.child(useremail).setValue(user).addOnSuccessListener {
-                                        findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                                        if (hasPackageUsageStatsPermission()) {
+                                            findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+
+                                        } else {
+                                            // ACCESS_NETWORK_STATE 권한이 없는 경우
+                                            requestPackageUsageStatsPermission()
+                                            findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
+                                        }
                                     }.addOnFailureListener {
                                         Toast.makeText(
                                             requireActivity(),
@@ -145,9 +179,18 @@ class loginFragment() : Fragment(), Parcelable {
     override fun onStart() {
         super.onStart()
         if(FirebaseAuth.getInstance().currentUser != null){
-            findNavController().navigate(
-                R.id.action_loginFragment_to_mainFragment
-            )
+            if (hasPackageUsageStatsPermission()) {
+                findNavController().navigate(
+                    R.id.action_loginFragment_to_mainFragment
+                )
+            } else {
+                // ACCESS_NETWORK_STATE 권한이 없는 경우
+                requestPackageUsageStatsPermission()
+                findNavController().navigate(
+                    R.id.action_loginFragment_to_mainFragment
+                )
+            }
+
         }
     }
 

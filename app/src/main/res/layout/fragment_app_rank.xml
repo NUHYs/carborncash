@@ -8,32 +8,6 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:id="@+id/apprank"
-<<<<<<< HEAD
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:text="탄소 배출량 랭킹"
-        android:textSize="30dp"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="73dp" />
-z
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-
-        android:scrollbars="vertical"
-        android:text=""
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_pre_main"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -59,7 +33,6 @@ z
 
         </LinearLayout>
     </ScrollView>
->>>>>>> cc0e503 (Initial commit)
 
     <ImageView
         android:id="@+id/btn_pre_main"
@@ -75,8 +48,6 @@ z
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.889" />
 
-<<<<<<< HEAD
-=======
     <ImageView
         android:id="@+id/btnGetDataUsage"
         android:layout_width="100dp"
@@ -87,6 +58,4 @@ z
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
->>>>>>> cc0e503 (Initial commit)
 </androidx.constraintlayout.widget.ConstraintLayout>

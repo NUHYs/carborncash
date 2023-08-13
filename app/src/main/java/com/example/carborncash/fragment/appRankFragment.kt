@@ -1,11 +1,6 @@
 package com.example.carborncash.fragment
 
-<<<<<<< HEAD
 import android.annotation.SuppressLint
-import android.app.usage.NetworkStats
-import android.app.usage.NetworkStatsManager
-import android.content.Context
-import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.TrafficStats
 import android.os.Bundle
@@ -22,13 +17,6 @@ import androidx.navigation.Navigation
 import com.example.carborncash.R
 import com.example.carborncash.databinding.FragmentAppRankBinding
 import com.example.carborncash.databinding.FragmentMainBinding
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-=======
 import android.app.AppOpsManager
 import android.app.usage.NetworkStats
 import android.app.usage.NetworkStatsManager
@@ -39,32 +27,23 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.Typeface
-import android.net.ConnectivityManager
-import android.net.TrafficStats
-import android.os.Bundle
+import android.os.Build
+import android.os.Process
+
 import android.provider.Settings
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.view.isGone
-import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+
 import androidx.navigation.fragment.findNavController
-import com.example.carborncash.R
-import com.example.carborncash.databinding.FragmentAppRankBinding
-import java.io.BufferedReader
-import java.io.FileNotFoundException
-import java.io.FileReader
-import java.io.IOException
 import java.util.Calendar
 
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER D  Compat change id reported: 171228096; UID 10186; state:
->>>>>>> cc0e503 (Initial commit)
 /**
  * A simple [Fragment] subclass.
  * Use the [appRankFragment.newInstance] factory method to
@@ -74,55 +53,19 @@ class appRankFragment : Fragment() {
 
     lateinit var navController: NavController
 
-<<<<<<< HEAD
     private var _binding : FragmentAppRankBinding? = null
     private val binding get() = _binding!!
+
+    private val PERMISSION_REQUEST_CODE = 123
+
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    @SuppressLint("WrongThread")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        val context = requireContext()
-
-        fun getSubscriberId(networkType: Int): String {
-            val context = requireContext()
-            if (ConnectivityManager.TYPE_MOBILE == networkType) {
-                val tm = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-                return tm.subscriberId
-            }
-            return ""
-        }
-
-        super.onCreate(savedInstanceState)
-
-        val networkStatsManager = requireActivity().getSystemService(Context.NETWORK_STATS_SERVICE) as NetworkStatsManager
-        var bucket: NetworkStats.Bucket
-
-        try {
-            bucket = networkStatsManager.querySummaryForDevice(ConnectivityManager.TYPE_WIFI, "", 0, System.currentTimeMillis())
-            val wifiUsage = bucket.rxBytes + bucket.txBytes
-
-            bucket = networkStatsManager.querySummaryForDevice(ConnectivityManager.TYPE_MOBILE, getSubscriberId(ConnectivityManager.TYPE_MOBILE), 0, System.currentTimeMillis())
-            val mobileUsage = bucket.rxBytes + bucket.txBytes
-
-            binding.apprank.text = "WiFi usage: $wifiUsage\nMobile usage: $mobileUsage"
-        } catch (e: RemoteException) {
-            e.printStackTrace()
-        }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view)
-=======
-    private var _binding: FragmentAppRankBinding? = null
-    private val binding get() = _binding!!
 
     companion object {
         private const val REQUEST_USAGE_ACCESS = 101
->>>>>>> cc0e503 (Initial commit)
     }
 
     override fun onCreateView(
@@ -133,23 +76,38 @@ class appRankFragment : Fragment() {
         return binding.root
     }
 
-<<<<<<< HEAD
-=======
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
 
         binding.btnPreMain.setOnClickListener() {
-            findNavController().navigate(R.id.action_appRankFragment_to_mainFragment)
+            findNavController().navigate(R.id.action_appRankFragment_to_mainFragment2)
         }
+
+
 
         view.findViewById<View>(R.id.btnGetDataUsage).setOnClickListener {
             binding.btnGetDataUsage.visibility = View.GONE
-            if (!checkUsageStatsPermission()) {
-                requestUsageStatsPermission()
-            } else {
-                getDataUsageFromOtherApp()
-            }
+            val textView = TextView(requireContext())
+            val context = requireContext()
+
+            textView.text = DataProvider.getUsageSummary(context).toString()
+
+            textView.textSize = 30f
+
+            textView.setTypeface(null, Typeface.BOLD)
+
+            textView.id = 1
+
+            textView.setTextColor(Color.BLACK)
+            val linearLayout = binding.listLayout.getChildAt(0) as LinearLayout
+            linearLayout.addView(textView)
+//            if (!checkUsageStatsPermission()) {
+//                requestUsageStatsPermission()
+//            } else {
+//                getDataUsageFromOtherApp()
+//            }
         }
     }
 
@@ -158,7 +116,7 @@ class appRankFragment : Fragment() {
         val mode = context?.packageName?.let {
             appOps?.checkOpNoThrow(
                 AppOpsManager.OPSTR_GET_USAGE_STATS,
-                android.os.Process.myUid(),
+                Process.myUid(),
                 it
             )
         }
@@ -181,95 +139,63 @@ class appRankFragment : Fragment() {
 
     private fun getDataUsageFromOtherApp() {
         // 어제 데이터 사용량 로그로 출력
-        logAppDataUsage()
+//        getYesterdayWiFiUsage()
 
         // 어제 와이파이 사용량 로그로 출력
-        logWiFiUsage()
+        getTodayWiFiUsage()
     }
 
-    private fun logAppDataUsage() {
-        val context = requireContext().applicationContext
 
+
+    private fun getTodayWiFiUsage() {
         val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DAY_OF_MONTH, -1) // 어제로 설정
         val endTime = calendar.timeInMillis
 
-        calendar.add(Calendar.DAY_OF_MONTH, -1) // 그제로 설정
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
         val startTime = calendar.timeInMillis
 
         val networkStatsManager =
-            context.getSystemService(Context.NETWORK_STATS_SERVICE) as NetworkStatsManager
-
-        val appDataUsage = networkStatsManager.querySummaryForDevice(
-            ConnectivityManager.TYPE_WIFI, "", startTime, endTime
-        ).rxBytes + networkStatsManager.querySummaryForDevice(
-            ConnectivityManager.TYPE_WIFI, "", startTime, endTime
-        ).txBytes
-
-        logToConsole("어제 앱 데이터 사용량: $appDataUsage 바이트")
-    }
-
-    private fun logWiFiUsage() {
-        val context = requireContext().applicationContext
-
-        val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DAY_OF_MONTH, -1) // Yesterday
-        val endTime = calendar.timeInMillis
-
-        calendar.add(Calendar.DAY_OF_MONTH, -1) // The day before yesterday
-        val startTime = calendar.timeInMillis
-
-        val networkStatsManager =
-            context.getSystemService(Context.NETWORK_STATS_SERVICE) as NetworkStatsManager
+            requireContext().getSystemService(Context.NETWORK_STATS_SERVICE) as NetworkStatsManager
 
         val bucket = NetworkStats.Bucket()
         val networkStats = networkStatsManager.querySummary(
             ConnectivityManager.TYPE_WIFI, "", startTime, endTime
         )
 
-        val usageStatsManager = context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+        val usageStatsManager = requireContext().getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
 
-        // Get the list of apps with usage stats for the specified time period
         val usageStatsList = usageStatsManager.queryUsageStats(
             UsageStatsManager.INTERVAL_DAILY,
             startTime,
             endTime
         )
 
-        if (usageStatsList.isEmpty()) {
-            logToConsole("No app WiFi usage data found for the specified time period.")
-            return
-        }
-
-        // Create a map to store package name -> app name mapping
         val packageToAppNameMap = mutableMapOf<String, String>()
 
-        // Query package name -> app name mapping
         for (usageStats in usageStatsList) {
             try {
-                val packageInfo = context.packageManager.getPackageInfo(
+                val packageInfo = requireContext().packageManager.getPackageInfo(
                     usageStats.packageName,
                     PackageManager.GET_ACTIVITIES
                 )
                 packageToAppNameMap[usageStats.packageName] = packageInfo.applicationInfo.loadLabel(
-                    context.packageManager
+                    requireContext().packageManager
                 ).toString()
             } catch (e: PackageManager.NameNotFoundException) {
                 // Handle the exception if necessary
             }
-        }
 
-        // Calculate WiFi usage time for each app and log the result
-        for (usageStats in usageStatsList) {
             networkStats.getNextBucket(bucket)
             val wifiUsage = bucket.rxBytes + bucket.txBytes
             val packageName = usageStats.packageName
             val appName = packageToAppNameMap[packageName]
             val wifiUsageTimeInMillis = usageStats.totalTimeInForeground
 
-            if (appName !== null) {
+            if (appName != null) {
                 val formattedWifiUsage = formatDataUsage(wifiUsage)
-                logToConsole("$appName: 와이파이 사용량: $formattedWifiUsage")
+                logToConsole("$appName: 오늘 와이파이 사용량: $formattedWifiUsage")
             }
         }
     }
@@ -293,6 +219,7 @@ class appRankFragment : Fragment() {
             }
         }
     }
+    private val displayedApps = HashSet<String>()
 
     private fun logToConsole(message: String) {
         val textView = TextView(requireContext())
@@ -309,13 +236,39 @@ class appRankFragment : Fragment() {
         val linearLayout = binding.listLayout.getChildAt(0) as LinearLayout
         linearLayout.addView(textView)
     }
->>>>>>> cc0e503 (Initial commit)
+
+    private fun getYesterdayWiFiUsage() {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_MONTH, -1) // 어제로 설정
+        val endTime = calendar.timeInMillis
+
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        val startTime = calendar.timeInMillis
+
+        val networkStatsManager =
+            requireContext().getSystemService(Context.NETWORK_STATS_SERVICE) as NetworkStatsManager
+
+        val bucket = NetworkStats.Bucket()
+        val networkStats = networkStatsManager.querySummary(
+            ConnectivityManager.TYPE_WIFI, "", startTime, endTime
+        )
+
+        var totalWiFiUsage = 0L
+
+        while (networkStats.hasNextBucket()) {
+            networkStats.getNextBucket(bucket)
+            totalWiFiUsage += bucket.rxBytes + bucket.txBytes
+        }
+
+        val formattedWiFiUsage = formatDataUsage(totalWiFiUsage)
+        logToConsole("어제 와이파이 사용량: $formattedWiFiUsage")
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> cc0e503 (Initial commit)
 }

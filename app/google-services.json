@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "878801833853",
+    "firebase_url": "https://carborn-cash-22243-default-rtdb.firebaseio.com",
+    "project_id": "carborn-cash-22243",
+    "storage_bucket": "carborn-cash-22243.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878801833853:android:69dd2583491d610788c614",
+        "android_client_info": {
+          "package_name": "com.example.carborncash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878801833853-pojte0ib5rdbp7e9i69eklqf8bj82uis.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.carborncash",
+            "certificate_hash": "bcd73a84e9c4dbfc9d081b925a6f8b1b1852fbc9"
+          }
+        },
+        {
+          "client_id": "878801833853-e1og87equsrqbjg3nu58lu4bearm7l4l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUscEpXba_xFTcTdQAs6DflOKtC6RuAEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878801833853-e1og87equsrqbjg3nu58lu4bearm7l4l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

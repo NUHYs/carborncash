@@ -105,7 +105,7 @@ class MainFragment : Fragment() {
 
         }
         binding.btnNextPointStore.setOnClickListener(){
-            findNavController().navigate(R.id.action_mainFragment_to_pointStoreFragment)
+            findNavController().navigate(R.id.action_mainFragment_to_totalFragment3)
         }
         binding.btnNextAppRank.setOnClickListener(){
             findNavController().navigate(R.id.action_mainFragment_to_appRankFragment)
