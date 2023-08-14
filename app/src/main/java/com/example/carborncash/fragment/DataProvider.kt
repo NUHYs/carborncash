@@ -54,13 +54,24 @@ class DataProvider {
             calendar[Calendar.MILLISECOND] = 999
             val endOfToday = calendar.timeInMillis
 
-            val networkStatsManager = context.getSystemService(Context.NETWORK_STATS_SERVICE) as NetworkStatsManager
+            val networkStatsManager =
+                context.getSystemService(Context.NETWORK_STATS_SERVICE) as NetworkStatsManager
 
             val appUsageMap = mutableMapOf<String, Double>()
             val bucket = NetworkStats.Bucket()
 
-            val wifiStats = networkStatsManager.queryDetails(ConnectivityManager.TYPE_WIFI, "", startOfToday, endOfToday)
-            val mobileStats = networkStatsManager.queryDetails(ConnectivityManager.TYPE_MOBILE, "", startOfToday, endOfToday)
+            val wifiStats = networkStatsManager.queryDetails(
+                ConnectivityManager.TYPE_WIFI,
+                "",
+                startOfToday,
+                endOfToday
+            )
+            val mobileStats = networkStatsManager.queryDetails(
+                ConnectivityManager.TYPE_MOBILE,
+                "",
+                startOfToday,
+                endOfToday
+            )
 
             while (wifiStats.hasNextBucket() || mobileStats.hasNextBucket()) {
                 if (wifiStats.hasNextBucket()) {
@@ -129,6 +140,36 @@ class DataProvider {
             return getUsage(context, startOfToday, end)
         }
 
+        fun getYesterdayUsage(context: Context): String {
+            val c = Calendar.getInstance()
+            c.add(Calendar.DATE, -1) // Subtract 1 day to get yesterday
+            c[Calendar.HOUR_OF_DAY] = 0
+            c[Calendar.MINUTE] = 0
+            c[Calendar.SECOND] = 0
+            c[Calendar.MILLISECOND] = 0
+            val startOfYesterday = c.timeInMillis
+
+            val endOfYesterday =
+                startOfYesterday + 24 * 60 * 60 * 1000 // Add 1 day's worth of milliseconds
+
+            return getUsage(context, startOfYesterday, endOfYesterday)
+        }
+
+        fun changemb(input : String): String {
+
+            val resultInMB: Double
+
+            resultInMB = if (input.endsWith("GB")) {
+                val valueInGB = input.substring(0, input.length - 2).toDouble()
+                valueInGB * 1000
+            } else {
+                input.substring(0, input.length - 2).toDouble()
+            }
+
+            val output = String.format("%.0f", resultInMB)
+            return output
+        }
+
         @RequiresApi(Build.VERSION_CODES.M)
         fun getUsage(context: Context, start: Long, end: Long): String {
             var downloads = 0L
@@ -172,7 +213,7 @@ class DataProvider {
                     resultInMB
                 ) + " MB"
             }
-        }
 
+        }
     }
 }

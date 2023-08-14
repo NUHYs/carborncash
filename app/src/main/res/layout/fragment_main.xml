@@ -127,19 +127,6 @@
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/backgroundrunbtn"
-        android:layout_width="87dp"
-        android:layout_height="67dp"
-
-        android:layout_marginTop="222dp"
-        android:layout_marginBottom="39dp"
-        app:layout_constraintBottom_toTopOf="@+id/recivebtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/messages_th"
-        tools:ignore="MissingConstraints" />
-
     <ImageView
         android:id="@+id/btn_next_appRank"
         android:layout_width="100dp"
@@ -196,5 +183,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_next_carbonRank"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/compare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/recivebtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/messages_th"
+        android:textSize="30dp"
+        android:textColor="@color/white"
+
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

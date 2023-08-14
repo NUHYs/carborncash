@@ -1,9 +1,5 @@
 package com.example.carborncash.fragment
 
-import android.app.AppOpsManager
-import android.content.Context
-import android.content.Intent
-import android.media.audiofx.BassBoost
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.carborncash.R
 import com.example.carborncash.databinding.FragmentMainBinding
+import com.example.carborncash.fragment.DataProvider.Companion.changemb
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -25,6 +22,9 @@ import com.google.firebase.database.MutableData
 import com.google.firebase.database.Transaction
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
+import java.util.Calendar
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -58,7 +58,7 @@ class MainFragment : Fragment() {
 
         navController = Navigation.findNavController(view)
 
-
+        updateSpecificData()
 
         val user = Firebase.auth.currentUser
         user?.let {
@@ -113,13 +113,61 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_mainFragment_to_appRankFragment)
         }
 
+        binding.compare.text = changemb(DataProvider.getYesterdayUsage(requireContext()))+ "/ 5000"
 
 
+
+    }
+
+    fun updateusage() {
+        val executor = Executors.newScheduledThreadPool(1)
+
+        val currentTime = Calendar.getInstance()
+        val midnight = Calendar.getInstance()
+
+        // 현재 시간을 기준으로 다음 자정의 시간 설정
+        midnight.set(Calendar.HOUR_OF_DAY, 0)
+        midnight.set(Calendar.MINUTE, 0)
+        midnight.set(Calendar.SECOND, 0)
+        midnight.add(Calendar.DAY_OF_MONTH, 1) // 다음 날로 설정
+
+        // 다음 자정까지 남은 시간 계산
+        val initialDelay = midnight.timeInMillis - currentTime.timeInMillis
+
+        // 코드를 실행할 Runnable 정의
+        val runnable = Runnable {
+            // 매일 자정에 실행할 코드 작성
+            updateSpecificData()
+        }
+
+        // 스케줄링 설정
+        executor.scheduleAtFixedRate(runnable, initialDelay, TimeUnit.DAYS.toMillis(1), TimeUnit.MILLISECONDS)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+
+    fun updateSpecificData() {
+        val firebaseDatabase = FirebaseDatabase.getInstance()
+        val newDataValue = changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() // 업데이트할 데이터 값
+
+        val user = Firebase.auth.currentUser
+        user?.let {
+            // 업데이트할 데이터 경로 설정
+            val dataRef: DatabaseReference = firebaseDatabase.reference.child("Users").child(it.email!!.toString().replace('.', '_')).child("ydayc")
+
+            // 데이터 업데이트
+            dataRef.setValue(newDataValue)
+                .addOnSuccessListener {
+                    println("데이터 업데이트 성공")
+                }
+                .addOnFailureListener { error ->
+                    println("데이터 업데이트  에러: $error")
+                }
+        }
     }
 
 
