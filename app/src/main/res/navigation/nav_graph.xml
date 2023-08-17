@@ -6,63 +6,6 @@
     app:startDestination="@id/loginFragment">
 
     <fragment
-        android:id="@+id/pointStoreFragment"
-        android:name="com.example.carborncash.fragment.pointStoreFragment"
-        android:label="fragment_point_store"
-        tools:layout="@layout/fragment_point_store" >
-        <action
-            android:id="@+id/action_pointStoreFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/detailappRankFragment"
-        android:name="com.example.carborncash.fragment.detailappRankFragment"
-        android:label="fragment_detailapp_rank"
-        tools:layout="@layout/fragment_detailapp_rank" >
-        <action
-            android:id="@+id/action_detailappRankFragment_to_appRankFragment"
-            app:destination="@id/appRankFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.example.carborncash.fragment.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_mainFragment_to_carbonRankFragment"
-            app:destination="@id/carbonRankFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_pointStoreFragment"
-            app:destination="@id/pointStoreFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_appRankFragment"
-            app:destination="@id/appRankFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_totalFragment3"
-            app:destination="@id/totalFragment3" />
-    </fragment>
-    <fragment
-        android:id="@+id/carbonRankFragment"
-        android:name="com.example.carborncash.fragment.carbonRankFragment"
-        android:label="fragment_carbon_rank"
-        tools:layout="@layout/fragment_carbon_rank" >
-        <action
-            android:id="@+id/action_carbonRankFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/appRankFragment"
-        android:name="com.example.carborncash.fragment.appRankFragment"
-        android:label="fragment_app_rank"
-        tools:layout="@layout/fragment_app_rank" >
-        <action
-            android:id="@+id/action_appRankFragment_to_detailappRankFragment"
-            app:destination="@id/detailappRankFragment" />
-        <action
-            android:id="@+id/action_appRankFragment_to_mainFragment2"
-            app:destination="@id/mainFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.carborncash.fragment.loginFragment"
         android:label="fragment_login"

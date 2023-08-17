@@ -87,17 +87,23 @@ class MainFragment : Fragment() {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
 
+
+
     }
 
-    lateinit var navController: NavController
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = Navigation.findNavController(view)
+        var energe = ((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt()) * 2) / 100
 
+        binding.carbonProgress.progress = energe
         updateSpecificData()
         weekadd()
+
+
+
 
         val user = Firebase.auth.currentUser
         user?.let {
@@ -149,12 +155,6 @@ class MainFragment : Fragment() {
                 .load(it.photoUrl)
                 .into(binding.profileimg)
 
-        }
-        binding.btnNextPointStore.setOnClickListener(){
-            findNavController().navigate(R.id.action_mainFragment_to_totalFragment3)
-        }
-        binding.btnNextAppRank.setOnClickListener(){
-            findNavController().navigate(R.id.action_mainFragment_to_appRankFragment)
         }
 
         binding.compare.text = changemb(DataProvider.getYesterdayUsage(requireContext()))+ "/ 5000"
@@ -249,6 +249,7 @@ class MainFragment : Fragment() {
             dailyExecutionManager.markExecuted()
 
         }
+
     }
 
     fun updateweekadd() {

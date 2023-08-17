@@ -51,7 +51,6 @@ import java.util.Calendar
  */
 class appRankFragment : Fragment() {
 
-    lateinit var navController: NavController
 
     private var _binding : FragmentAppRankBinding? = null
     private val binding get() = _binding!!
@@ -78,11 +77,7 @@ class appRankFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navController = Navigation.findNavController(view)
 
-        binding.btnPreMain.setOnClickListener() {
-            findNavController().navigate(R.id.action_appRankFragment_to_mainFragment2)
-        }
 
 
 
@@ -229,7 +224,6 @@ class appRankFragment : Fragment() {
             }
         }
     }
-    private val displayedApps = HashSet<String>()
 
     private fun logToConsole(message: String) {
         val textView = TextView(requireContext())
