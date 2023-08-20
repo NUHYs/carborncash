@@ -19,7 +19,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import com.example.carborncash.MainActivity
 import com.example.carborncash.R
+import com.example.carborncash.databinding.ActivityMainBinding
 import com.example.carborncash.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -83,21 +85,18 @@ class loginFragment() : Fragment(){
             startActivityForResult(intent, 10001)
         }
 
-        // 권한 체크 및 요청
-        if (!hasPackageUsageStatsPermission()) {
-            requestPackageUsageStatsPermission()
-        }
-
         return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val options =GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
         client = GoogleSignIn.getClient(requireActivity(), options)
+
     }
 
 
@@ -122,12 +121,10 @@ class loginFragment() : Fragment(){
 
                                 if (snapshot.exists()) {
                                     if (hasPackageUsageStatsPermission()) {
-                                        findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
 
                                     } else {
                                         // ACCESS_NETWORK_STATE 권한이 없는 경우
                                         requestPackageUsageStatsPermission()
-                                        findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
                                     }
                                     // 이메일이 이미 존재하므로 메인 페이지로 이동
                                 } else {
@@ -136,12 +133,10 @@ class loginFragment() : Fragment(){
                                     val user = User(useremail, 0, 0, 0,0)
                                     database.child(useremail).setValue(user).addOnSuccessListener {
                                         if (hasPackageUsageStatsPermission()) {
-                                            findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
 
                                         } else {
                                             // ACCESS_NETWORK_STATE 권한이 없는 경우
                                             requestPackageUsageStatsPermission()
-                                            findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
                                         }
                                     }.addOnFailureListener {
                                         Toast.makeText(
@@ -167,17 +162,13 @@ class loginFragment() : Fragment(){
 
     override fun onStart() {
         super.onStart()
+
+
         if(FirebaseAuth.getInstance().currentUser != null){
             if (hasPackageUsageStatsPermission()) {
-                findNavController().navigate(
-                    R.id.action_loginFragment_to_mainFragment
-                )
             } else {
                 // ACCESS_NETWORK_STATE 권한이 없는 경우
                 requestPackageUsageStatsPermission()
-                findNavController().navigate(
-                    R.id.action_loginFragment_to_mainFragment
-                )
             }
 
         }

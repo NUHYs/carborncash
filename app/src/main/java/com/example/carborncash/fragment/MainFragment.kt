@@ -100,7 +100,14 @@ class MainFragment : Fragment() {
 
         binding.carbonProgress.progress = energe
         updateSpecificData()
-        weekadd()
+        val dailyExecutionManager = DailyExecutionManager(requireContext())
+
+        if (dailyExecutionManager.shouldExecute()) {
+            // 하루에 딱 한 번만 실행되어야 하는 코드 실행
+            weekadd()
+            dailyExecutionManager.markExecuted()
+
+        }
 
 
 
@@ -128,7 +135,6 @@ class MainFragment : Fragment() {
             binding.recivebtn.setOnClickListener(){
                 val dailyExecutionManager2 = DailyExecutionManager2(requireContext())
                 if (dailyExecutionManager2.shouldExecute2()) {
-                    binding.recivebtn.visibility = View.GONE
                     myref.runTransaction(object : Transaction.Handler {
                         override fun doTransaction(mutableData: MutableData): Transaction.Result {
                             val currentValue = mutableData.getValue(Int::class.java) ?: 0
@@ -189,29 +195,23 @@ class MainFragment : Fragment() {
         }
     }
 
-    var isrun: Boolean? = null
-
     fun weekadd() {
 
         val today = LocalDate.now()
         val dayOfWeek = today.dayOfWeek
-        if(isrun == false){
-            when (dayOfWeek) {
-                DayOfWeek.MONDAY -> {
-                    updateweekadd()
-                    isrun = true
-                }
-                DayOfWeek.TUESDAY -> {
-                    updateweekaddtwo()
-                    updateweekadd()
-                    isrun = true
-                }
-                else -> {
-                    updateweekadd()
-                    isrun = true
-                }
+        when (dayOfWeek) {
+            DayOfWeek.MONDAY -> {
+                updateweekadd()
+            }
+            DayOfWeek.TUESDAY -> {
+                updateweekaddtwo()
+                updateweekadd()
+            }
+            else -> {
+                updateweekadd()
             }
         }
+
     }
 //
 //    fun updateusage() {
@@ -241,14 +241,7 @@ class MainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        updateusage()
-        val dailyExecutionManager = DailyExecutionManager(requireContext())
 
-        if (dailyExecutionManager.shouldExecute()) {
-            // 하루에 딱 한 번만 실행되어야 하는 코드 실행
-            isrun = false
-            dailyExecutionManager.markExecuted()
-
-        }
 
     }
 

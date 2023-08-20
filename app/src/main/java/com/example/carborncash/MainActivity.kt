@@ -8,6 +8,7 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.carborncash.databinding.ActivityMainBinding
 import com.example.carborncash.fragment.MainFragment
+import com.example.carborncash.fragment.loginFragment
 import com.example.carborncash.fragment.appRankFragment
 import com.example.carborncash.fragment.carbonRankFragment
 import com.example.carborncash.fragment.pointStoreFragment
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        replaceFragment(MainFragment())
+        replaceFragment(loginFragment())
 
         binding.navigationView.setOnItemSelectedListener {
             when(it.itemId) {
