@@ -88,45 +88,45 @@
         android:background="@drawable/ellipse_2"
         app:layout_constraintBottom_toBottomOf="@+id/carbon_progress"
         app:layout_constraintEnd_toEndOf="@+id/carbon_progress"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/carbon_progress"
-        app:layout_constraintTop_toTopOf="@+id/carbon_progress" />
+        app:layout_constraintTop_toTopOf="@+id/carbon_progress"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/compare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="267dp"
-        android:layout_marginBottom="84dp"
         android:elevation="10dp"
         android:text="TextView"
         android:textColor="@color/black"
 
 
         android:textSize="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/rectangle_2"
+        app:layout_constraintBottom_toBottomOf="@+id/recivebtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/messages_th"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/messages_th" />
 
     <TextView
         android:id="@+id/compare2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
-        android:layout_marginBottom="138dp"
         android:elevation="10dp"
         android:text="TextView"
 
 
         android:textColor="@color/black"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/rectangle_2"
+        app:layout_constraintBottom_toBottomOf="@+id/recivebtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/messages_th" />
+        app:layout_constraintTop_toTopOf="@+id/messages_th"
+        app:layout_constraintVertical_bias="0.0" />
 
     <View
         android:id="@+id/rectangle_1"

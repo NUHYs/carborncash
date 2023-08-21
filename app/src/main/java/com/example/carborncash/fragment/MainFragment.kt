@@ -157,9 +157,9 @@ class MainFragment : Fragment() {
 
         }
 
-        binding.compare.text = "어제 사용량"+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 660) / 1000).toString()
+        binding.compare.text = "어제 사용량 : "+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 660) / 1000).toString() + "mg"
 
-        binding.compare2.text = "오늘 사용량"+((changemb(DataProvider.getDayUsage(requireContext())).toInt() * 660) / 1000).toString()
+        binding.compare2.text = "오늘 사용량 : "+((changemb(DataProvider.getDayUsage(requireContext())).toInt() * 660) / 1000).toString() + "mg"
 
     }
 
