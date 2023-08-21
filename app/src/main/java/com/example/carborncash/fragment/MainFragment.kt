@@ -96,7 +96,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var energe = ((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt()) * 2) / 100
+        var energe = ((changemb(DataProvider.getDayUsage(requireContext())).toInt()) * 2) / 100
 
         binding.carbonProgress.progress = energe
         updateSpecificData()
@@ -157,9 +157,9 @@ class MainFragment : Fragment() {
 
         }
 
-        binding.compare.text = changemb(DataProvider.getYesterdayUsage(requireContext()))+ "/ 5000"
+        binding.compare.text = "어제 사용량"+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 660) / 1000).toString()
 
-
+        binding.compare2.text = "오늘 사용량"+((changemb(DataProvider.getDayUsage(requireContext())).toInt() * 660) / 1000).toString()
 
     }
 
