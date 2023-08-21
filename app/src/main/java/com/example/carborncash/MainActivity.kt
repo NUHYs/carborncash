@@ -1,11 +1,16 @@
 package com.example.carborncash
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.carborncash.databinding.ActivityMainBinding
 import com.example.carborncash.fragment.MainFragment
 import com.example.carborncash.fragment.loginFragment
@@ -22,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         replaceFragment(loginFragment())
 
+
         binding.navigationView.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.pointStoreFragment -> replaceFragment(pointStoreFragment())
@@ -30,17 +36,27 @@ class MainActivity : AppCompatActivity() {
                 R.id.carbonRankFragment-> replaceFragment(carbonRankFragment())
 
                 else ->{
-
                 }
             }
             true
         }
+
+
     }
 
-    private fun replaceFragment(fragment : Fragment){
+
+    fun replaceFragment(fragment : Fragment){
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.mainFrameLayout,fragment)
         fragmentTransaction.commit()
+        if (fragment is loginFragment) {
+            binding.navigationView.visibility = View.GONE
+        } else {
+            binding.navigationView.visibility = View.VISIBLE
+        }
     }
+
 }
+
+

@@ -3,25 +3,17 @@ package com.example.carborncash.fragment
 import android.app.AppOpsManager
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import android.provider.Settings
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.ServiceWorkerClient
-import android.widget.ImageButton
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.NavController
 import com.example.carborncash.MainActivity
 import com.example.carborncash.R
-import com.example.carborncash.databinding.ActivityMainBinding
 import com.example.carborncash.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -54,6 +46,10 @@ class loginFragment() : Fragment(){
 
     private lateinit var database : DatabaseReference
 
+
+
+
+
     private fun hasPackageUsageStatsPermission(): Boolean {
         val appOps = activity?.getSystemService(Context.APP_OPS_SERVICE) as? AppOpsManager
         val mode = context?.packageName?.let {
@@ -74,6 +70,7 @@ class loginFragment() : Fragment(){
 
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -85,8 +82,11 @@ class loginFragment() : Fragment(){
             startActivityForResult(intent, 10001)
         }
 
+
         return binding.root
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,11 +118,14 @@ class loginFragment() : Fragment(){
                         database.child(useremail).addListenerForSingleValueEvent(object :
                             ValueEventListener {
                             override fun onDataChange(snapshot: DataSnapshot) {
+                                val mActivity = activity as MainActivity
 
                                 if (snapshot.exists()) {
                                     if (hasPackageUsageStatsPermission()) {
+                                        mActivity.replaceFragment(MainFragment())
 
                                     } else {
+                                        mActivity.replaceFragment(MainFragment())
                                         // ACCESS_NETWORK_STATE 권한이 없는 경우
                                         requestPackageUsageStatsPermission()
                                     }
@@ -133,14 +136,16 @@ class loginFragment() : Fragment(){
                                     val user = User(useremail, 0, 0, 0,0)
                                     database.child(useremail).setValue(user).addOnSuccessListener {
                                         if (hasPackageUsageStatsPermission()) {
+                                            mActivity.replaceFragment(MainFragment())
 
                                         } else {
+                                            mActivity.replaceFragment(MainFragment())
                                             // ACCESS_NETWORK_STATE 권한이 없는 경우
                                             requestPackageUsageStatsPermission()
                                         }
                                     }.addOnFailureListener {
                                         Toast.makeText(
-                                            requireActivity(),
+                                            requireContext(),
                                             "Failed Email Saved",
                                             Toast.LENGTH_SHORT
                                         ).show()
@@ -158,21 +163,23 @@ class loginFragment() : Fragment(){
         }
     }
 
-
-
     override fun onStart() {
         super.onStart()
 
+        val mActivity = activity as MainActivity
 
         if(FirebaseAuth.getInstance().currentUser != null){
             if (hasPackageUsageStatsPermission()) {
+                mActivity.replaceFragment(MainFragment())
             } else {
                 // ACCESS_NETWORK_STATE 권한이 없는 경우
                 requestPackageUsageStatsPermission()
+                mActivity.replaceFragment(MainFragment())
             }
 
         }
     }
+
 
 
 }

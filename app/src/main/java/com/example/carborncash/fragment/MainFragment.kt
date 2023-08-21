@@ -100,14 +100,7 @@ class MainFragment : Fragment() {
 
         binding.carbonProgress.progress = energe
         updateSpecificData()
-        val dailyExecutionManager = DailyExecutionManager(requireContext())
 
-        if (dailyExecutionManager.shouldExecute()) {
-            // 하루에 딱 한 번만 실행되어야 하는 코드 실행
-            weekadd()
-            dailyExecutionManager.markExecuted()
-
-        }
 
 
 
@@ -133,6 +126,7 @@ class MainFragment : Fragment() {
             myref.addValueEventListener(pointListener)
 
             binding.recivebtn.setOnClickListener(){
+
                 val dailyExecutionManager2 = DailyExecutionManager2(requireContext())
                 if (dailyExecutionManager2.shouldExecute2()) {
                     myref.runTransaction(object : Transaction.Handler {
@@ -241,6 +235,14 @@ class MainFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        updateusage()
+        val dailyExecutionManager = DailyExecutionManager(requireContext())
+
+        if (dailyExecutionManager.shouldExecute()) {
+            // 하루에 딱 한 번만 실행되어야 하는 코드 실행
+            weekadd()
+            dailyExecutionManager.markExecuted()
+
+        }
 
 
     }

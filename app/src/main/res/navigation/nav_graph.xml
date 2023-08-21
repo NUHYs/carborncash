@@ -16,10 +16,21 @@
         <action
             android:id="@+id/action_loginFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
+        <action
+            android:id="@+id/action_loginFragment_to_appRankFragment2"
+            app:destination="@id/appRankFragment2" />
     </fragment>
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.carborncash.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/detailappRankFragment"
+        android:name="com.example.carborncash.fragment.detailappRankFragment"
+        android:label="detailappRankFragment" />
+    <fragment
+        android:id="@+id/appRankFragment2"
+        android:name="com.example.carborncash.fragment.appRankFragment"
+        android:label="appRankFragment" />
 </navigation>
