@@ -1,15 +1,19 @@
 package com.example.carborncash.fragment
 
-import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.carborncash.Adapter
+import com.example.carborncash.Adapter_User_Rank
+import com.example.carborncash.Constants
+import com.example.carborncash.Constants4_User_Rank
+import com.example.carborncash.Employee_User_Rank
 import com.example.carborncash.R
 import com.example.carborncash.databinding.FragmentAppRankBinding
 import com.example.carborncash.databinding.FragmentCarbonRankBinding
@@ -59,58 +63,23 @@ class carbonRankFragment : Fragment() {
     }
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        database = FirebaseDatabase.getInstance().reference
+
+
+
+        retrieveAndSortData(view)
 
 //        val user = Firebase.auth.currentUser
 //        user?.let {
 
-        database = FirebaseDatabase.getInstance().reference
-
-        view.findViewById<View>(R.id.btnGetDataUsage).setOnClickListener {
-            retrieveAndSortData()
-        }
-
-
-//        view.findViewById<View>(R.id.btnGetDataUsage).setOnClickListener {
-//            usersRef.addValueEventListener(object : ValueEventListener {
-//                override fun onDataChange(dataSnapshot: DataSnapshot) {
-//                    val userList = mutableListOf<User>()
-//
-//                    for (userSnapshot in dataSnapshot.children) {
-//                        val user = userSnapshot.getValue(User::class.java)
-//                        if (user != null) {
-//                            userList.add(user)
-//                        }
-//                    }
-//
-//
-//                    binding.btnGetDataUsage.visibility = View.GONE
-//                    val textView2 = TextView(requireContext())
-//                    textView2.text = userList.sortBy { it.weekt }.toString()
-//
-//                    textView2.textSize = 30f
-//
-//                    textView2.setTypeface(null, Typeface.BOLD)
-//
-//                    textView2.setTextColor(Color.BLACK)
-//                    val linearLayout = binding.listLayout.getChildAt(0) as LinearLayout
-//                    linearLayout.addView(textView2)
-//
-//
-//                    // 정렬된 데이터를 사용하여 작업을 수행하세요.
-//                    // userList를 RecyclerView 등에 바인딩하거나 원하는대로 활용할 수 있습니다.
-//                }
-//
-//                override fun onCancelled(databaseError: DatabaseError) {
-//                    // 데이터베이스 읽기 실패 시 처리할 내용을 여기에 추가하세요.
-//                }
-//            })
 
     }
 
 
-    private fun retrieveAndSortData() {
+    private fun retrieveAndSortData(view: View) {
         val usersRef = database.child("Users")
         val query = usersRef.orderByChild("weekt")
 
@@ -127,6 +96,39 @@ class carbonRankFragment : Fragment() {
 
                 // weekt 값에 따라 내림차순으로 정렬
                 userList.sortByDescending { it.weekt }
+
+                val list_size = userList.count { true }
+
+
+                    val employeeList=ArrayList<Employee_User_Rank>()
+                    val emp1= Employee_User_Rank(userList[0].useremail, userList[0].weekt.toString())
+                    employeeList.add(emp1)
+                    val emp2= Employee_User_Rank(userList[1].useremail, userList[1].weekt.toString())
+                    employeeList.add(emp2)
+                    val emp3= Employee_User_Rank(userList[2].useremail, userList[2].weekt.toString())
+                    employeeList.add(emp3)
+                    val emp4= Employee_User_Rank(userList[3].useremail, userList[3].weekt.toString())
+                    employeeList.add(emp4)
+                    val emp5= Employee_User_Rank(userList[4].useremail, userList[4].weekt.toString())
+                    employeeList.add(emp5)
+                    val emp6= Employee_User_Rank(userList[5].useremail, userList[5].weekt.toString())
+                    employeeList.add(emp6)
+
+                    // Assign employeelist to ItemAdapter
+                    val itemAdapter= Adapter_User_Rank(employeeList)
+                    // Set the LayoutManager that
+                    // this RecyclerView will use.
+                    val recyclerView: RecyclerView =view.findViewById(R.id.recycleView)
+                    recyclerView.layoutManager = LinearLayoutManager(context)
+                    // adapter instance is set to the
+                    // recyclerview to inflate the items.
+                    recyclerView.adapter = itemAdapter
+
+
+
+
+
+
 
 
                 // 정렬된 데이터를 화면에 표시하는 로직 구현
