@@ -114,19 +114,20 @@
         android:id="@+id/compare2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="63dp"
+
+
+        android:layout_marginEnd="53dp"
+        android:layout_marginBottom="96dp"
         android:elevation="10dp"
         android:text="TextView"
-
-
         android:textColor="@color/black"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/recivebtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/messages_th"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="@+id/recivebtn"
+        app:layout_constraintStart_toStartOf="@+id/recivebtn"
+        app:layout_constraintTop_toTopOf="@+id/recivebtn" />
 
     <View
         android:id="@+id/rectangle_1"

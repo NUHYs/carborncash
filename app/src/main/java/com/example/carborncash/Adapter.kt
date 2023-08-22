@@ -3,6 +3,7 @@ package com.example.carborncash
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -26,12 +27,14 @@ class Adapter(private val emplist: ArrayList<Employee>) : RecyclerView.Adapter<A
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentEmp = emplist[position]
         holder.name.text = currentEmp.name
-        holder.email.text = currentEmp.email
+        holder.email.text = currentEmp.price
+        holder.image.setImageResource(currentEmp.image)
     }
 
     // This class defines the ViewHolder object for each item in the RecyclerView
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val name: TextView = itemView.findViewById(R.id.tvName)
-        val email: TextView = itemView.findViewById(R.id.tvEmail)
+        val image: ImageView = itemView.findViewById(R.id.item_image)
+        val name: TextView = itemView.findViewById(R.id.item_name)
+        val email: TextView = itemView.findViewById(R.id.item_price)
     }
 }

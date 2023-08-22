@@ -16,27 +16,6 @@ import java.util.*
 class DataProvider {
 
     companion object {
-//        @RequiresApi(Build.VERSION_CODES.M)
-//        fun getTotalUsage(context: Context): String {
-//            val calendar = Calendar.getInstance()
-//            calendar.add(Calendar.DATE, 1)
-//            val end = calendar.timeInMillis
-//            return getUsage(context, 0, end)
-//        }
-
-
-//        @RequiresApi(Build.VERSION_CODES.M)
-//        fun getMonthUsage(context: Context): String {
-//            val c2 = Calendar.getInstance()
-//            c2.add(Calendar.DATE, -30)
-//            val startOfMonth = c2.timeInMillis
-//
-//            val calendar = Calendar.getInstance()
-//            calendar.add(Calendar.DATE, 1)
-//            val end = calendar.timeInMillis
-//
-//            return getUsage(context, startOfMonth, end)
-//        }
 
         @RequiresApi(Build.VERSION_CODES.M)
         fun getUsageSummary(context: Context): Map<String, String> {
