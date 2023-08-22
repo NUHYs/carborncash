@@ -15,16 +15,19 @@
         android:layout_height="match_parent">
 
         <!--TextView-->
+
+        <!--RecyclerView-->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="20sp"
+            android:text="Carbon Point Store"
             android:textColor="@color/black"
-            android:textStyle="bold"
-            android:text="Fragment 1"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <!--RecyclerView-->
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleView"
             android:layout_width="match_parent"

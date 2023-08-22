@@ -133,7 +133,7 @@ class loginFragment() : Fragment(){
                                 } else {
                                     // 이메일이 존재하지 않으므로 새로운 사용자를 생성
 
-                                    val user = User(useremail, 0, 0, 0,0)
+                                    val user = User(useremail, 0, 0, 0)
                                     database.child(useremail).setValue(user).addOnSuccessListener {
                                         if (hasPackageUsageStatsPermission()) {
                                             mActivity.replaceFragment(MainFragment())

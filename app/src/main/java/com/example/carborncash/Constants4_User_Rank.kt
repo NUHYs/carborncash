@@ -1,6 +1,6 @@
 package com.example.carborncash
 
-object Constants {
+object Constants4_User_Rank {
     // Arraylist and return the Arraylist
     fun getEmployeeData():ArrayList<Employee>{
         // create an arraylist of type employee class
