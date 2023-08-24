@@ -39,6 +39,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.carborncash.Adapter
+import com.example.carborncash.Adapter_App_Rank
+import com.example.carborncash.Adapter_User_Rank
+import com.example.carborncash.Constants
+import com.example.carborncash.Constants4_App_Rank
+import com.example.carborncash.Employee_App_Rank
+import com.example.carborncash.Employee_User_Rank
+import com.example.carborncash.fragment.DataProvider.Companion.changemb
 import java.util.Calendar
 
 
@@ -57,14 +67,7 @@ class appRankFragment : Fragment() {
 
 
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-
-    companion object {
-        private const val REQUEST_USAGE_ACCESS = 101
-    }
+    // TODO: Rename and change types of paramete
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,194 +83,58 @@ class appRankFragment : Fragment() {
 
 
 
+        val employeeList=ArrayList<Employee_App_Rank>()
+        val emp1= Employee_App_Rank("原神", "사용량 : "+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 11 * 41/100) ).toString() + "g", R.drawable.onesin )
+        employeeList.add(emp1)
+        val emp2= Employee_App_Rank("Youtube", "사용량 : "+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 11 * 23/100) ).toString() + "g", R.drawable.youtube)
+        employeeList.add(emp2)
+        val emp3= Employee_App_Rank("Instagram", "사용량 : "+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 11 * 17/100) ).toString() + "g", R.drawable.insta)
+        employeeList.add(emp3)
+        val emp4= Employee_App_Rank("Netflix", "사용량 : "+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 11 * 9/100) ).toString() + "g", R.drawable.neflix)
+        employeeList.add(emp4)
+        val emp5= Employee_App_Rank("Chrome", "사용량 : "+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 11 * 6/100) ).toString() + "g", R.drawable.crom)
+        employeeList.add(emp5)
+        val emp6= Employee_App_Rank("Naver", "사용량 : "+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 11 * 4/100) ).toString() + "g", R.drawable.naver)
+        employeeList.add(emp6)
 
-        view.findViewById<View>(R.id.btnGetDataUsage).setOnClickListener {
-            binding.btnGetDataUsage.visibility = View.GONE
-            val textView = TextView(requireContext())
-            val textView2 = TextView(requireContext())
-            val context = requireContext()
-            textView2.text = DataProvider.getDayUsage(context)
-
-            textView2.textSize = 30f
-
-            textView2.setTypeface(null, Typeface.BOLD)
-
-            textView2.id = 2
-
-            textView.setTextColor(Color.BLACK)
-            val linearLayout = binding.listLayout.getChildAt(0) as LinearLayout
-            linearLayout.addView(textView2)
-
-            textView.text = DataProvider.getUsageSummary(context).toString()
-
-            textView.textSize = 30f
-
-            textView.setTypeface(null, Typeface.BOLD)
-
-            textView.id = 1
-
-            textView.setTextColor(Color.BLACK)
-            linearLayout.addView(textView)
-//            if (!checkUsageStatsPermission()) {
-//                requestUsageStatsPermission()
-//            } else {
-//                getDataUsageFromOtherApp()
-//            }
-        }
-    }
-
-    private fun checkUsageStatsPermission(): Boolean {
-        val appOps = context?.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager?
-        val mode = context?.packageName?.let {
-            appOps?.checkOpNoThrow(
-                AppOpsManager.OPSTR_GET_USAGE_STATS,
-                Process.myUid(),
-                it
-            )
-        }
-        return mode == AppOpsManager.MODE_ALLOWED
-    }
-
-    private fun requestUsageStatsPermission() {
-        val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
-        startActivityForResult(intent, REQUEST_USAGE_ACCESS)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_USAGE_ACCESS) {
-            if (checkUsageStatsPermission()) {
-                getDataUsageFromOtherApp()
-            }
-        }
-    }
-
-    private fun getDataUsageFromOtherApp() {
-        // 어제 데이터 사용량 로그로 출력
-//        getYesterdayWiFiUsage()
-
-        // 어제 와이파이 사용량 로그로 출력
-        getTodayWiFiUsage()
-    }
+        val itemAdapter= Adapter_App_Rank(employeeList)
+        // Set the LayoutManager that
+        // this RecyclerView will use.
+        val recyclerView: RecyclerView =view.findViewById(R.id.recycleView)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        // adapter instance is set to the
+        // recyclerview to inflate the items.
+        recyclerView.adapter = itemAdapter
 
 
-
-    private fun getTodayWiFiUsage() {
-        val calendar = Calendar.getInstance()
-        val endTime = calendar.timeInMillis
-
-        calendar.set(Calendar.HOUR_OF_DAY, 0)
-        calendar.set(Calendar.MINUTE, 0)
-        calendar.set(Calendar.SECOND, 0)
-        val startTime = calendar.timeInMillis
-
-        val networkStatsManager =
-            requireContext().getSystemService(Context.NETWORK_STATS_SERVICE) as NetworkStatsManager
-
-        val bucket = NetworkStats.Bucket()
-        val networkStats = networkStatsManager.querySummary(
-            ConnectivityManager.TYPE_WIFI, "", startTime, endTime
-        )
-
-        val usageStatsManager = requireContext().getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-
-        val usageStatsList = usageStatsManager.queryUsageStats(
-            UsageStatsManager.INTERVAL_DAILY,
-            startTime,
-            endTime
-        )
-
-        val packageToAppNameMap = mutableMapOf<String, String>()
-
-        for (usageStats in usageStatsList) {
-            try {
-                val packageInfo = requireContext().packageManager.getPackageInfo(
-                    usageStats.packageName,
-                    PackageManager.GET_ACTIVITIES
-                )
-                packageToAppNameMap[usageStats.packageName] = packageInfo.applicationInfo.loadLabel(
-                    requireContext().packageManager
-                ).toString()
-            } catch (e: PackageManager.NameNotFoundException) {
-                // Handle the exception if necessary
-            }
-
-            networkStats.getNextBucket(bucket)
-            val wifiUsage = bucket.rxBytes + bucket.txBytes
-            val packageName = usageStats.packageName
-            val appName = packageToAppNameMap[packageName]
-            val wifiUsageTimeInMillis = usageStats.totalTimeInForeground
-
-            if (appName != null) {
-                val formattedWifiUsage = formatDataUsage(wifiUsage)
-                logToConsole("$appName: 오늘 와이파이 사용량: $formattedWifiUsage")
-            }
-        }
-    }
-    private fun formatDataUsage(wifiUsage: Long): String {
-        val kbLimit = 1024 // 1 KB in bytes
-        val mbLimit = kbLimit * 1024 // 1 MB in bytes
-        val gbLimit = mbLimit * 1024 // 1 GB in bytes
-
-        return when {
-            wifiUsage >= gbLimit -> {
-                String.format("%.2f GB", wifiUsage.toDouble() / gbLimit)
-            }
-            wifiUsage >= mbLimit -> {
-                String.format("%.2f MB", wifiUsage.toDouble() / mbLimit)
-            }
-            wifiUsage >= kbLimit -> {
-                String.format("%.2f KB", wifiUsage.toDouble() / kbLimit)
-            }
-            else -> {
-                "$wifiUsage bytes"
-            }
-        }
-    }
-
-    private fun logToConsole(message: String) {
-        val textView = TextView(requireContext())
-
-        textView.text = message
-
-        textView.textSize = 30f
-
-        textView.setTypeface(null, Typeface.BOLD)
-
-        textView.id = 1
-
-        textView.setTextColor(Color.BLACK)
-        val linearLayout = binding.listLayout.getChildAt(0) as LinearLayout
-        linearLayout.addView(textView)
-    }
-
-    private fun getYesterdayWiFiUsage() {
-        val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DAY_OF_MONTH, -1) // 어제로 설정
-        val endTime = calendar.timeInMillis
-
-        calendar.set(Calendar.HOUR_OF_DAY, 0)
-        calendar.set(Calendar.MINUTE, 0)
-        calendar.set(Calendar.SECOND, 0)
-        val startTime = calendar.timeInMillis
-
-        val networkStatsManager =
-            requireContext().getSystemService(Context.NETWORK_STATS_SERVICE) as NetworkStatsManager
-
-        val bucket = NetworkStats.Bucket()
-        val networkStats = networkStatsManager.querySummary(
-            ConnectivityManager.TYPE_WIFI, "", startTime, endTime
-        )
-
-        var totalWiFiUsage = 0L
-
-        while (networkStats.hasNextBucket()) {
-            networkStats.getNextBucket(bucket)
-            totalWiFiUsage += bucket.rxBytes + bucket.txBytes
-        }
-
-        val formattedWiFiUsage = formatDataUsage(totalWiFiUsage)
-        logToConsole("어제 와이파이 사용량: $formattedWiFiUsage")
+//        view.findViewById<View>(R.id.btnGetDataUsage).setOnClickListener {
+//            binding.btnGetDataUsage.visibility = View.GONE
+//            val textView = TextView(requireContext())
+//            val textView2 = TextView(requireContext())
+//            val context = requireContext()
+//            textView2.text = DataProvider.getDayUsage(context)
+//
+//            textView2.textSize = 30f
+//
+//            textView2.setTypeface(null, Typeface.BOLD)
+//
+//            textView2.id = 2
+//
+//            textView.setTextColor(Color.BLACK)
+//            val linearLayout = binding.listLayout.getChildAt(0) as LinearLayout
+//            linearLayout.addView(textView2)
+//
+//            textView.text = DataProvider.getUsageSummary(context).toString()
+//
+//            textView.textSize = 30f
+//
+//            textView.setTypeface(null, Typeface.BOLD)
+//
+//            textView.id = 1
+//
+//            textView.setTextColor(Color.BLACK)
+//            linearLayout.addView(textView)
+//        }
     }
 
     override fun onDestroy() {

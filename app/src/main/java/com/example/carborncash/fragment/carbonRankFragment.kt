@@ -123,18 +123,6 @@ class carbonRankFragment : Fragment() {
                     // adapter instance is set to the
                     // recyclerview to inflate the items.
                     recyclerView.adapter = itemAdapter
-
-
-
-
-
-
-
-
-                // 정렬된 데이터를 화면에 표시하는 로직 구현
-                // 예: RecyclerView나 ListView 사용
-
-                // 여기서 userList를 화면에 표시하는 로직을 구현하면 됩니다.
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

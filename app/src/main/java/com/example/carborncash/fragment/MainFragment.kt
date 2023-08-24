@@ -207,30 +207,6 @@ class MainFragment : Fragment() {
         }
 
     }
-//
-//    fun updateusage() {
-//        val executor = Executors.newScheduledThreadPool(1)
-//
-//        val currentTime = Calendar.getInstance()
-//        val midnight = Calendar.getInstance()
-//
-//        // 현재 시간을 기준으로 다음 자정의 시간 설정        midnight.set(Calendar.HOUR_OF_DAY, 0)
-//        midnight.set(Calendar.MINUTE, 0)
-//        midnight.set(Calendar.SECOND, 0)
-//        midnight.add(Calendar.DAY_OF_MONTH, 1) // 다음 날로 설정
-//
-//        // 다음 자정까지 남은 시간 계산
-//        val initialDelay = midnight.timeInMillis - currentTime.timeInMillis
-//
-//        // 코드를 실행할 Runnable 정의
-//        val runnable = Runnable {
-//            // 매일 자정에 실행할 코드 작성
-//            isrun = false
-//        }
-//
-//        // 스케줄링 설정
-//        executor.scheduleAtFixedRate(runnable, initialDelay, TimeUnit.DAYS.toMillis(1), TimeUnit.MILLISECONDS)
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
