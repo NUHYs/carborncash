@@ -3,17 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="820dp"
     tools:context=".fragment.MainFragment"
-    android:background="@color/white">
+    android:background="@color/gray1">
 
     <RelativeLayout
         android:id="@+id/messages_th"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_alignParentEnd="true"
-        android:background="@color/white"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rectangle_2"
+        android:elevation="40dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
@@ -22,180 +27,165 @@
             android:id="@+id/profileimg"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="11dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="7dp"
-            android:layout_marginLeft="11dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="7dp"
-            android:layout_marginBottom="0dp"
-            android:layout_toStartOf="@+id/profile" />
-
-        <TextView
-            android:id="@+id/profile"
-            android:layout_width="347dp"
-            android:layout_height="78dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="3dp"
-            android:gravity="center_vertical|right"
-            android:text="text"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            tools:ignore="RtlCompat,RtlHardcoded" />
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/splash_logo" />
 
     </RelativeLayout>
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="49dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="1dp"
-        android:minWidth="50dp"
-        android:minHeight="50dp"
-        app:layout_constraintBottom_toBottomOf="@+id/point"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
-        app:layout_constraintStart_toStartOf="@+id/point"
-        app:layout_constraintTop_toTopOf="@+id/point" />
 
 
-    <ProgressBar
-        android:id="@+id/carbon_progress"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:adjustViewBounds="true"
-        android:indeterminateOnly="false"
-        android:progressDrawable="@drawable/circle"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/progress_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/rectangle_2"
+        android:elevation="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/messages_th"
-        app:layout_constraintVertical_bias="0.18"
-        tools:progress="60" />
+        tools:ignore="MissingClass">
 
-    <android.widget.Button
-        android:id="@+id/recivebtn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/ellipse_2"
-        app:layout_constraintBottom_toBottomOf="@+id/carbon_progress"
-        app:layout_constraintEnd_toEndOf="@+id/carbon_progress"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/carbon_progress"
-        app:layout_constraintTop_toTopOf="@+id/carbon_progress"
-        app:layout_constraintVertical_bias="0.0" />
+        <android.widget.Button
+            android:id="@+id/recivebtn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/ellipse_2"
+            app:layout_constraintBottom_toBottomOf="@+id/carbon_progress"
+            app:layout_constraintEnd_toEndOf="@+id/carbon_progress"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/carbon_progress"
+            app:layout_constraintTop_toTopOf="@+id/carbon_progress"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/compare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="267dp"
-        android:elevation="10dp"
-        android:text="TextView"
-        android:textColor="@color/black"
+        <ProgressBar
+            android:id="@+id/carbon_progress"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="20dp"
+            android:adjustViewBounds="true"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@drawable/circle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:progress="60" />
+
+        <TextView
+            android:id="@+id/compare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/recivebtn"
+            app:layout_constraintEnd_toEndOf="@+id/recivebtn"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="@+id/recivebtn"
+            app:layout_constraintTop_toTopOf="@+id/recivebtn"
+            app:layout_constraintVertical_bias="0.755" />
+
+        <TextView
+            android:id="@+id/compare2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="63dp"
+            android:layout_marginEnd="53dp"
+            android:layout_marginBottom="96dp"
+            android:elevation="10dp"
+            android:text="TextView"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/recivebtn"
+            app:layout_constraintEnd_toEndOf="@+id/recivebtn"
+            app:layout_constraintStart_toStartOf="@+id/recivebtn"
+            app:layout_constraintTop_toTopOf="@+id/recivebtn" />
+
+        <TextView
+            android:id="@+id/point"
+            android:layout_width="205dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="32dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recivebtn" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="49dp"
+            android:layout_height="37dp"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
+            app:layout_constraintBottom_toBottomOf="@+id/point"
+            app:layout_constraintEnd_toEndOf="@+id/point"
+            app:layout_constraintStart_toStartOf="@+id/point"
+            app:layout_constraintTop_toTopOf="@+id/point" />
+
+        //////////////////////////////////////////////////////////////////////
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/slide_view"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/rectangle_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/slide1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.15" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/recivebtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/messages_th" />
-
-    <TextView
-        android:id="@+id/compare2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="63dp"
-
-
-        android:layout_marginEnd="53dp"
-        android:layout_marginBottom="96dp"
-        android:elevation="10dp"
-        android:text="TextView"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/recivebtn"
-        app:layout_constraintEnd_toEndOf="@+id/recivebtn"
-        app:layout_constraintStart_toStartOf="@+id/recivebtn"
-        app:layout_constraintTop_toTopOf="@+id/recivebtn" />
-
-    <View
-        android:id="@+id/rectangle_1"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="80dp"
-        android:background="@drawable/rectangle_1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carbon_progress"
-        app:layout_constraintVertical_bias="0.64" />
-
-    <View
-        android:id="@+id/rectangle_2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/rectangle_2"
-        app:layout_constraintBottom_toBottomOf="@+id/rectangle_1"
-        app:layout_constraintEnd_toEndOf="@+id/rectangle_1"
-        app:layout_constraintStart_toStartOf="@+id/rectangle_1"
-        app:layout_constraintTop_toTopOf="@+id/rectangle_1" />
-
-    <TextView
-        android:id="@+id/point"
-        android:layout_width="205dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="72dp"
-        android:text=""
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.922"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/messages_th" />
-
-    <View
-        android:id="@+id/line"
-        android:layout_width="0dp"
-        android:layout_height="3dp"
-        android:background="#989494"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/messages_th" />
-
-    <Button
-        android:id="@+id/notification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
-        android:layout_marginBottom="1dp"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@+id/carbon_progress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/messages_th" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

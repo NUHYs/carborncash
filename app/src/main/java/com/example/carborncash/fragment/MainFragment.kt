@@ -155,7 +155,6 @@ class MainFragment : Fragment() {
 
             }
 
-            binding.profile.text = it.email
             Glide.with(this /* context */)
                 .load(it.photoUrl)
                 .into(binding.profileimg)

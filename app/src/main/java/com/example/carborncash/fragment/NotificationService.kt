@@ -30,13 +30,13 @@ class NotificationService : Service() {
     }
 
     private fun displayNotification() {
-        val color = ContextCompat.getColor(this, com.example.carborncash.R.color.light_blue_50)
+        val color = ContextCompat.getColor(this, com.example.carborncash.R.color.logogreen)
 
         val mlargeicon = when {
-            DataProvider.changemb(DataProvider.getDayUsage(this)).toInt() < 1000 -> BitmapFactory.decodeResource(resources, com.example.carborncash.R.drawable.fivetree)
-            DataProvider.changemb(DataProvider.getDayUsage(this)).toInt() < 2000 -> BitmapFactory.decodeResource(resources, com.example.carborncash.R.drawable.fourtree)
-            DataProvider.changemb(DataProvider.getDayUsage(this)).toInt() < 3000 -> BitmapFactory.decodeResource(resources, com.example.carborncash.R.drawable.threetree)
-            DataProvider.changemb(DataProvider.getDayUsage(this)).toInt() < 4000 -> BitmapFactory.decodeResource(resources, com.example.carborncash.R.drawable.twotree)
+            (DataProvider.changemb(DataProvider.getDayUsage(this)).toInt() * 11) < 10000 -> BitmapFactory.decodeResource(resources, com.example.carborncash.R.drawable.fivetree)
+            (DataProvider.changemb(DataProvider.getDayUsage(this)).toInt() * 11) < 20000 -> BitmapFactory.decodeResource(resources, com.example.carborncash.R.drawable.fourtree)
+            (DataProvider.changemb(DataProvider.getDayUsage(this)).toInt() * 11) < 30000 -> BitmapFactory.decodeResource(resources, com.example.carborncash.R.drawable.threetree)
+            (DataProvider.changemb(DataProvider.getDayUsage(this)).toInt() * 11) < 40000 -> BitmapFactory.decodeResource(resources, com.example.carborncash.R.drawable.twotree)
             else -> BitmapFactory.decodeResource(resources, com.example.carborncash.R.drawable.onetree)
         }
 

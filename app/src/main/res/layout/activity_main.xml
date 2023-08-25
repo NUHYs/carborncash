@@ -25,8 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/navi_menu"
-        tools:ignore="MissingConstraints">
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        tools:ignore="MissingConstraints"></com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <!--Linear Layout-->
     <LinearLayout
