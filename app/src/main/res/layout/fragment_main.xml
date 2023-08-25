@@ -47,6 +47,17 @@
             android:layout_marginBottom="4dp"
             android:src="@drawable/splash_logo" />
 
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="69dp"
+            android:layout_marginTop="57dp"
+            android:layout_marginEnd="90dp"
+            android:layout_marginBottom="162dp"
+            android:text="오늘의 사용량"
+            android:textColor="@color/black" />
+
     </RelativeLayout>
 
 
@@ -67,6 +78,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/messages_th"
         tools:ignore="MissingClass">
+
 
         <android.widget.Button
             android:id="@+id/recivebtn"

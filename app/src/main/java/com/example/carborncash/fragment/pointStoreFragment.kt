@@ -10,8 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.carborncash.Adapter
 import com.example.carborncash.Constants
 import com.example.carborncash.R
+import com.example.carborncash.databinding.FragmentMainBinding
+import com.example.carborncash.databinding.FragmentPointStoreBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 
 // TODO: Rename parameter arguments, choose names that match
@@ -29,6 +36,11 @@ class pointStoreFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var auth: FirebaseAuth
+    private lateinit var database : DatabaseReference
+
+    private var _binding : FragmentPointStoreBinding? = null
+    private val binding get() = _binding!!
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,14 +64,45 @@ class pointStoreFragment : Fragment() {
         // adapter instance is set to the
         // recyclerview to inflate the items.
         recyclerView.adapter = itemAdapter
+
+
+        val user = Firebase.auth.currentUser
+        user?.let {
+            database = FirebaseDatabase.getInstance().getReference("Users")
+            var myref = database.child(it.email!!.toString().replace('.', '_')).child("point")
+
+            binding.progressbar.visibility = View.VISIBLE
+
+            val pointListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val pointValue = dataSnapshot.getValue(Int::class.java) ?: 0
+                    binding.cash.text = "C : " + pointValue.toString()
+                    binding.progressbar.visibility = View.GONE
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Failed to read value
+                }
+            }
+            myref.addValueEventListener(pointListener)
+
+        }
+
     }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_point_store, container, false)
+        _binding = FragmentPointStoreBinding.inflate(inflater, container, false)
+        return binding.root
+
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     companion object {

@@ -29,6 +29,10 @@ class Adapter(private val emplist: ArrayList<Employee>) : RecyclerView.Adapter<A
         holder.name.text = currentEmp.name
         holder.email.text = currentEmp.price
         holder.image.setImageResource(currentEmp.image)
+        holder.name1.text = currentEmp.name
+        holder.email1.text = currentEmp.price
+        holder.image1.setImageResource(currentEmp.image)
+
     }
 
     // This class defines the ViewHolder object for each item in the RecyclerView
@@ -36,5 +40,8 @@ class Adapter(private val emplist: ArrayList<Employee>) : RecyclerView.Adapter<A
         val image: ImageView = itemView.findViewById(R.id.item_image)
         val name: TextView = itemView.findViewById(R.id.item_name)
         val email: TextView = itemView.findViewById(R.id.item_price)
+        val image1: ImageView = itemView.findViewById(R.id.item_image1)
+        val name1: TextView = itemView.findViewById(R.id.item_name1)
+        val email1: TextView = itemView.findViewById(R.id.item_price1)
     }
 }
