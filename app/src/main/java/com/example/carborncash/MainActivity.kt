@@ -1,5 +1,8 @@
 package com.example.carborncash
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.carborncash.databinding.ActivityMainBinding
 import com.example.carborncash.fragment.MainFragment
+import com.example.carborncash.fragment.NotificationService
 import com.example.carborncash.fragment.loginFragment
 import com.example.carborncash.fragment.appRankFragment
 import com.example.carborncash.fragment.carbonRankFragment
@@ -26,6 +30,24 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         replaceFragment(loginFragment())
+
+        val notificationIntent = Intent(this, NotificationService::class.java)
+        val pendingIntent = PendingIntent.getService(
+            this,
+            0,
+            notificationIntent,
+            PendingIntent.FLAG_IMMUTABLE
+        )
+
+        // 매 15분마다 알림 서비스 실행
+        val alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+        val intervalMillis = 1 * 60 * 1000 // 1분
+        alarmManager.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            System.currentTimeMillis(),
+            intervalMillis.toLong(),
+            pendingIntent
+        )
 
 
         binding.navigationView.setOnItemSelectedListener {

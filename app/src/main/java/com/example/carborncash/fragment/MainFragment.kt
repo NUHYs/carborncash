@@ -1,15 +1,20 @@
 package com.example.carborncash.fragment
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.carborncash.R
 import com.example.carborncash.databinding.FragmentMainBinding
@@ -27,8 +32,6 @@ import com.google.firebase.ktx.Firebase
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.util.Calendar
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -98,6 +101,8 @@ class MainFragment : Fragment() {
 
         var energe = ((changemb(DataProvider.getDayUsage(requireContext())).toInt()) * 2) / 100
 
+
+
         binding.carbonProgress.progress = energe
         updateSpecificData()
 
@@ -163,6 +168,8 @@ class MainFragment : Fragment() {
 
     }
 
+
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
@@ -170,6 +177,7 @@ class MainFragment : Fragment() {
 
 
     fun updateSpecificData() {
+        
         val firebaseDatabase = FirebaseDatabase.getInstance()
         val newDataValue = changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() // 업데이트할 데이터 값
 
@@ -208,8 +216,11 @@ class MainFragment : Fragment() {
 
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 //        updateusage()
         val dailyExecutionManager = DailyExecutionManager(requireContext())
 
