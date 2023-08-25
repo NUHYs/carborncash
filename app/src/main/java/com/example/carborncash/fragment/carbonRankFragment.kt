@@ -97,21 +97,19 @@ class carbonRankFragment : Fragment() {
                 // weekt 값에 따라 내림차순으로 정렬
                 userList.sortByDescending { it.weekt }
 
-                val list_size = userList.count { true }
-
 
                     val employeeList=ArrayList<Employee_User_Rank>()
-                    val emp1= Employee_User_Rank(userList[0].useremail, userList[0].weekt.toString())
+                    val emp1= Employee_User_Rank(userList[0].useremail, (userList[0].weekt * 1.1).toString()+ "g")
                     employeeList.add(emp1)
-                    val emp2= Employee_User_Rank(userList[1].useremail, userList[1].weekt.toString())
+                    val emp2= Employee_User_Rank(userList[1].useremail, (userList[1].weekt * 1.1).toString()+ "g")
                     employeeList.add(emp2)
-                    val emp3= Employee_User_Rank(userList[2].useremail, userList[2].weekt.toString())
+                    val emp3= Employee_User_Rank(userList[2].useremail, (userList[2].weekt * 1.1).toString()+ "g")
                     employeeList.add(emp3)
-                    val emp4= Employee_User_Rank(userList[3].useremail, userList[3].weekt.toString())
+                    val emp4= Employee_User_Rank(userList[3].useremail, (userList[3].weekt * 1.1).toString()+ "g")
                     employeeList.add(emp4)
-                    val emp5= Employee_User_Rank(userList[4].useremail, userList[4].weekt.toString())
+                    val emp5= Employee_User_Rank(userList[4].useremail, (userList[4].weekt * 1.1).toString()+ "g")
                     employeeList.add(emp5)
-                    val emp6= Employee_User_Rank(userList[5].useremail, userList[5].weekt.toString())
+                    val emp6= Employee_User_Rank(userList[5].useremail, (userList[5].weekt * 1.1).toString()+ "g")
                     employeeList.add(emp6)
 
                     // Assign employeelist to ItemAdapter
