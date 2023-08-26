@@ -20,12 +20,54 @@
 
         <TextView
             android:layout_width="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Yesterday App Carbon Usage Rank"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="7dp"
+            android:background="@color/black" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="410dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/allg"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_marginTop="26dp"
+                android:layout_marginLeft="50dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/group" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="190dp"
+                android:layout_marginTop="190dp"
+                android:src="@drawable/insta10" />
+
+
+        </FrameLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:background="@color/black" />
 
 
         <androidx.recyclerview.widget.RecyclerView
