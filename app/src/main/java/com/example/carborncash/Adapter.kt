@@ -1,47 +1,62 @@
 package com.example.carborncash
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.carborncash.fragment.MainFragment
+import com.example.carborncash.fragment.pointStoreFragment
+
+
 
 class Adapter(private val emplist: ArrayList<Employee>) : RecyclerView.Adapter<Adapter.MyViewHolder>() {
 
-    // This method creates a new ViewHolder object for each item in the RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        // Inflate the layout for each item and return a new ViewHolder object
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.items_list, parent, false)
+
+
+
         return MyViewHolder(itemView)
     }
 
-    // This method returns the total
-    // number of items in the data set
     override fun getItemCount(): Int {
         return emplist.size
     }
 
-    // This method binds the data to the ViewHolder object
-    // for each item in the RecyclerView
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentEmp = emplist[position]
-        holder.name.text = currentEmp.name
-        holder.email.text = currentEmp.price
-        holder.image.setImageResource(currentEmp.image)
-        holder.name1.text = currentEmp.name
-        holder.email1.text = currentEmp.price
-        holder.image1.setImageResource(currentEmp.image)
-
+    interface OnItemClickListener {
+        fun onItemClick(employee: Employee)
     }
 
-    // This class defines the ViewHolder object for each item in the RecyclerView
+    private var onItemClickListener: OnItemClickListener? = null
+
+    // Set click listener for items
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        onItemClickListener = listener
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        val currentEmp = emplist[position]
+
+        holder.name.text = currentEmp.name
+
+        holder.star.text = currentEmp.star
+        holder.image.setImageResource(currentEmp.image)
+
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.onItemClick(emplist[position])
+        }
+    }
+
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.item_image)
         val name: TextView = itemView.findViewById(R.id.item_name)
-        val email: TextView = itemView.findViewById(R.id.item_price)
-        val image1: ImageView = itemView.findViewById(R.id.item_image1)
-        val name1: TextView = itemView.findViewById(R.id.item_name1)
-        val email1: TextView = itemView.findViewById(R.id.item_price1)
+        val star: TextView = itemView.findViewById(R.id.star)
     }
+
 }
+

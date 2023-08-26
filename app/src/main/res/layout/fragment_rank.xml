@@ -50,7 +50,7 @@
                 android:id="@+id/user"
                 android:layout_weight="1"
                 android:textStyle="bold"
-                android:backgroundTint="#A4A4A4"
+                android:backgroundTint="#D8D8D8"
                 android:text="Usage Rank"
                 android:textAlignment="center" />
 
@@ -61,7 +61,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:textStyle="bold"
-                android:backgroundTint="#D8D8D8"
+                android:backgroundTint="#A4A4A4"
                 android:text="Trial Rank"
                 android:textAlignment="center" />
         </LinearLayout>

@@ -16,118 +16,51 @@
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         >
 
 
         <ImageView
-            android:layout_marginTop="10dp"
             android:id="@+id/item_image"
-            android:layout_width="133dp"
-            android:layout_height="127dp"
+            android:layout_width="128dp"
+            android:layout_height="121dp"
             android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_launcher"
+            android:layout_marginTop="24dp"
             android:background="@drawable/roundimagegray"
-            />
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="3dp"
+            android:src="@mipmap/ic_launcher" />
 
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="25dp"
+
+            android:background="@color/grayblack" />
 
         <TextView
             android:id="@+id/star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="스타벅스"
+            android:text="7 Days"
             android:textColor="#B7B7B7"
             android:textSize="15dp"
-            android:textStyle="bold"
-            android:layout_marginBottom="7dp"
-            />
-
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/item_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="-10dp"
             android:text="TITLE"
             android:textColor="@android:color/black"
             android:textSize="15dp"
-            android:layout_marginBottom="3dp"
             android:textStyle="bold" />
-
-
-        <TextView
-            android:id="@+id/item_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="content"
-            android:textColor="#D9D9D9" />
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="150dp"
-        android:layout_height="219dp"
-        android:layout_weight="1"
-        android:elevation="10dp"
-        android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/rectangle_2"
-        >
-
-
-        <ImageView
-            android:layout_marginTop="10dp"
-            android:id="@+id/item_image1"
-            android:layout_width="133dp"
-            android:layout_height="127dp"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            android:background="@drawable/roundimagegray"
-            android:src="@mipmap/ic_launcher"
-            />
-
-
-        <TextView
-            android:id="@+id/star1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="스타벅스"
-            android:textColor="#B7B7B7"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:layout_marginBottom="7dp"
-            />
-
-
-        <TextView
-            android:id="@+id/item_name1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="TITLE"
-            android:textColor="@android:color/black"
-            android:textSize="15dp"
-            android:layout_marginBottom="3dp"
-            android:textStyle="bold" />
-
-
-        <TextView
-            android:id="@+id/item_price1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="content"
-            android:textColor="#D9D9D9" />
 
 
     </LinearLayout>

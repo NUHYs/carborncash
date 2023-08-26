@@ -19,6 +19,7 @@ import com.example.carborncash.R
 import com.example.carborncash.databinding.FragmentAppRankBinding
 import com.example.carborncash.databinding.FragmentCarbonRankBinding
 import com.example.carborncash.databinding.FragmentMainBinding
+import com.example.carborncash.databinding.FragmentRankBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -35,11 +36,11 @@ import com.google.firebase.ktx.Firebase
  * Use the [carbonRankFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class carbonRankFragment : Fragment() {
+class rankFragment : Fragment() {
     // TODO: Rename and change types of parameters
 
 
-    private var _binding: FragmentCarbonRankBinding? = null
+    private var _binding: FragmentRankBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var database: DatabaseReference
@@ -54,7 +55,7 @@ class carbonRankFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCarbonRankBinding.inflate(inflater, container, false)
+        _binding = FragmentRankBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -69,14 +70,12 @@ class carbonRankFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         database = FirebaseDatabase.getInstance().reference
 
-
+        binding.user.setOnClickListener(){
+            val mActivity = activity as MainActivity
+            mActivity.replaceFragment(carbonRankFragment())
+        }
 
         retrieveAndSortData(view)
-
-        binding.trial.setOnClickListener(){
-            val mActivity = activity as MainActivity
-            mActivity.replaceFragment(rankFragment())
-        }
 
 //        val user = Firebase.auth.currentUser
 //        user?.let {
@@ -87,7 +86,7 @@ class carbonRankFragment : Fragment() {
 
     private fun retrieveAndSortData(view: View) {
         val usersRef = database.child("Users")
-        val query = usersRef.orderByChild("weekt")
+        val query = usersRef.orderByChild("point")
 
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -104,29 +103,29 @@ class carbonRankFragment : Fragment() {
                 userList.sortBy { it.weekt }
 
 
-                    val employeeList=ArrayList<Employee_User_Rank>()
-                    val emp1= Employee_User_Rank("1. "+userList[0].useremail, (userList[0].weekt * 11).toString()+ "g")
-                    employeeList.add(emp1)
-                    val emp2= Employee_User_Rank("2. "+userList[1].useremail, (userList[1].weekt * 11).toString()+ "g")
-                    employeeList.add(emp2)
-                    val emp3= Employee_User_Rank("3. "+userList[2].useremail, (userList[2].weekt * 11).toString()+ "g")
-                    employeeList.add(emp3)
-                    val emp4= Employee_User_Rank("4. "+userList[3].useremail, (userList[3].weekt * 11).toString()+ "g")
-                    employeeList.add(emp4)
-                    val emp5= Employee_User_Rank("5. "+userList[4].useremail, (userList[4].weekt * 11).toString()+ "g")
-                    employeeList.add(emp5)
-                    val emp6= Employee_User_Rank("6. "+userList[5].useremail, (userList[5].weekt * 11).toString()+ "g")
-                    employeeList.add(emp6)
+                val employeeList=ArrayList<Employee_User_Rank>()
+                val emp1= Employee_User_Rank("1. "+userList[0].useremail, "24 Trial")
+                employeeList.add(emp1)
+                val emp2= Employee_User_Rank("2. "+userList[1].useremail, "22 Trial")
+                employeeList.add(emp2)
+                val emp3= Employee_User_Rank("3. "+userList[2].useremail, "17 Trial")
+                employeeList.add(emp3)
+                val emp4= Employee_User_Rank("4. "+userList[3].useremail, "13 Trial")
+                employeeList.add(emp4)
+                val emp5= Employee_User_Rank("5. "+userList[4].useremail, "8 Trial")
+                employeeList.add(emp5)
+                val emp6= Employee_User_Rank("6. "+userList[5].useremail, "2 Trial")
+                employeeList.add(emp6)
 
-                    // Assign employeelist to ItemAdapter
-                    val itemAdapter= Adapter_User_Rank(employeeList)
-                    // Set the LayoutManager that
-                    // this RecyclerView will use.
-                    val recyclerView: RecyclerView =view.findViewById(R.id.recycleView)
-                    recyclerView.layoutManager = LinearLayoutManager(context)
-                    // adapter instance is set to the
-                    // recyclerview to inflate the items.
-                    recyclerView.adapter = itemAdapter
+                // Assign employeelist to ItemAdapter
+                val itemAdapter= Adapter_User_Rank(employeeList)
+                // Set the LayoutManager that
+                // this RecyclerView will use.
+                val recyclerView: RecyclerView =view.findViewById(R.id.recycleView)
+                recyclerView.layoutManager = LinearLayoutManager(context)
+                // adapter instance is set to the
+                // recyclerview to inflate the items.
+                recyclerView.adapter = itemAdapter
             }
 
             override fun onCancelled(databaseError: DatabaseError) {

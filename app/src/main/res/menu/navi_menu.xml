@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/pointStoreFragment"
-        android:title="SHOP"
+        android:title="TRIAL"
         android:icon="@drawable/baseline_shopping_cart_24"/>
 
     <item

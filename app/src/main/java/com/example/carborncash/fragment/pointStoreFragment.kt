@@ -1,16 +1,18 @@
 package com.example.carborncash.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.carborncash.Adapter
 import com.example.carborncash.Constants
+import com.example.carborncash.Employee
+import com.example.carborncash.MainActivity
 import com.example.carborncash.R
-import com.example.carborncash.databinding.FragmentMainBinding
 import com.example.carborncash.databinding.FragmentPointStoreBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -19,8 +21,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,17 +51,38 @@ class pointStoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         // getting the employeelist
         val employelist= Constants.getEmployeeData()
         // Assign employeelist to ItemAdapter
+
+
+
         val itemAdapter= Adapter(employelist)
+
+        itemAdapter.setOnItemClickListener(object : Adapter.OnItemClickListener {
+            override fun onItemClick(employee: Employee) {
+                val mActivity = activity as MainActivity
+
+                mActivity.replaceFragment(PurchaseFragment())
+            }
+        })
+        val gridLayoutManager = GridLayoutManager(requireContext(), 2)
+
+
         // Set the LayoutManager that
         // this RecyclerView will use.
         val recyclerView: RecyclerView =view.findViewById(R.id.recycleView)
         recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.setLayoutManager(gridLayoutManager)
+
         // adapter instance is set to the
         // recyclerview to inflate the items.
+
         recyclerView.adapter = itemAdapter
+
+
 
 
         val user = Firebase.auth.currentUser

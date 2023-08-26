@@ -44,7 +44,7 @@ class NotificationService : Service() {
             .setSmallIcon(com.example.carborncash.R.drawable.carbonlogo)
             .setLargeIcon(mlargeicon)
             .setContentTitle(HtmlCompat.fromHtml("<font color=\"$color\">Today Carbon Use</font>", HtmlCompat.FROM_HTML_MODE_LEGACY))
-            .setContentText("usage: ${(DataProvider.changemb(DataProvider.getDayUsage(this)).toInt() * 11)}g / 55000g")
+            .setContentText("usage: ${(DataProvider.changemb(DataProvider.getDayUsage(this)).toInt() * 11)}g / 77000g\n (7GB 캐싱 트라이얼 진행중)")
             .setOngoing(true)
             .build()
 

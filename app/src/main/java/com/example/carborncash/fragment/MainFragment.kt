@@ -123,7 +123,7 @@ class MainFragment : Fragment() {
             val pointListener = object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val pointValue = dataSnapshot.getValue(Int::class.java) ?: 0
-                    binding.point.text = "보유 포인트 : "+ pointValue.toString()
+                    binding.point.text = "C : "+ pointValue.toString()
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {

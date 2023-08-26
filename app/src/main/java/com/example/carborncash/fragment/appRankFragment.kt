@@ -84,17 +84,17 @@ class appRankFragment : Fragment() {
 
 
         val employeeList=ArrayList<Employee_App_Rank>()
-        val emp1= Employee_App_Rank("原神", "사용량 : "+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 11 * 41/100) ).toString() + "g", R.drawable.onesin )
+        val emp1= Employee_App_Rank("1. Youtube", "사용량 : 100245 g", R.drawable.youtube )
         employeeList.add(emp1)
-        val emp2= Employee_App_Rank("Youtube", "사용량 : "+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 11 * 23/100) ).toString() + "g", R.drawable.youtube)
+        val emp2= Employee_App_Rank("2. Netflix", "사용량 : 87345 g", R.drawable.neflix)
         employeeList.add(emp2)
-        val emp3= Employee_App_Rank("Instagram", "사용량 : "+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 11 * 17/100) ).toString() + "g", R.drawable.insta)
+        val emp3= Employee_App_Rank("3. Instagram", "사용량 : 58325 g", R.drawable.insta)
         employeeList.add(emp3)
-        val emp4= Employee_App_Rank("Netflix", "사용량 : "+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 11 * 9/100) ).toString() + "g", R.drawable.neflix)
+        val emp4= Employee_App_Rank("4. 原神", "사용량 : 30253 g", R.drawable.onesin)
         employeeList.add(emp4)
-        val emp5= Employee_App_Rank("Chrome", "사용량 : "+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 11 * 6/100) ).toString() + "g", R.drawable.crom)
+        val emp5= Employee_App_Rank("5. Chrome", "사용량 : 10245 g", R.drawable.crom)
         employeeList.add(emp5)
-        val emp6= Employee_App_Rank("Naver", "사용량 : "+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 11 * 4/100) ).toString() + "g", R.drawable.naver)
+        val emp6= Employee_App_Rank("6. Naver", "사용량 : 6034 g", R.drawable.naver)
         employeeList.add(emp6)
 
         val itemAdapter= Adapter_App_Rank(employeeList)
