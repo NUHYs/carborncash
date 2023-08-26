@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 // TODO: Rename parameter arguments, choose names that match
@@ -44,11 +45,6 @@ class pointStoreFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val user = Firebase.auth.currentUser
-        user?.let {
-            // Name, email address, and profile photo Url
-            val email : String? = it.email
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

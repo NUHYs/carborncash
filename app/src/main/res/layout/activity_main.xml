@@ -11,39 +11,61 @@
         android:id="@+id/mainFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp" >
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigationView"
+        <FrameLayout
+            android:id="@+id/frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/llMain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context=".MainActivity">
+
+                <!--Frame layout-->
+            </LinearLayout>
+        </FrameLayout>
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/nav_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:itemBackground="@color/light_blue_50"
-        app:itemIconTint="@drawable/menu_click_color"
-        app:itemTextColor="@drawable/menu_click_color"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rectangle_2"
+        android:elevation="40dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/navi_menu"
-        tools:ignore="MissingConstraints"></com.google.android.material.bottomnavigation.BottomNavigationView>
-
-    <!--Linear Layout-->
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:id="@+id/llMain"
         tools:context=".MainActivity">
 
-        <!--Frame layout-->
-        <FrameLayout
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navigationView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/frame_layout">
-        </FrameLayout>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="4dp"
+            android:elevation="0dp"
+            android:outlineAmbientShadowColor="@android:color/transparent"
+            android:outlineSpotShadowColor="@android:color/transparent"
+            app:itemIconTint="@drawable/menu_click_color"
+            app:itemTextColor="@drawable/menu_click_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/navi_menu"
+            tools:ignore="MissingConstraints">
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

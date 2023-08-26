@@ -19,6 +19,8 @@
         <!--RecyclerView-->
 
         <TextView
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -26,6 +28,11 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="2dp"
+            android:background="@color/grayblack" />
 
 
         <androidx.recyclerview.widget.RecyclerView

@@ -1,5 +1,8 @@
 package com.example.carborncash.fragment
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -8,8 +11,11 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 import android.view.ViewGroup
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
@@ -101,8 +107,6 @@ class MainFragment : Fragment() {
 
         var energe = ((changemb(DataProvider.getDayUsage(requireContext())).toInt()) * 2) / 100
 
-
-
         binding.carbonProgress.progress = energe
         updateSpecificData()
 
@@ -115,13 +119,11 @@ class MainFragment : Fragment() {
             database = FirebaseDatabase.getInstance().getReference("Users")
             var myref = database.child(it.email!!.toString().replace('.', '_')).child("point")
 
-            binding.progressBar.visibility = View.VISIBLE
 
             val pointListener = object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val pointValue = dataSnapshot.getValue(Int::class.java) ?: 0
                     binding.point.text = "보유 포인트 : "+ pointValue.toString()
-                    binding.progressBar.visibility = View.GONE
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
@@ -132,8 +134,8 @@ class MainFragment : Fragment() {
 
             binding.recivebtn.setOnClickListener(){
 
-                val dailyExecutionManager2 = DailyExecutionManager2(requireContext())
-                if (dailyExecutionManager2.shouldExecute2()) {
+//                val dailyExecutionManager2 = DailyExecutionManager2(requireContext())
+//                if (dailyExecutionManager2.shouldExecute2()) {
                     myref.runTransaction(object : Transaction.Handler {
                         override fun doTransaction(mutableData: MutableData): Transaction.Result {
                             val currentValue = mutableData.getValue(Int::class.java) ?: 0
@@ -150,8 +152,8 @@ class MainFragment : Fragment() {
                             // Transaction completed
                         }
                     })
-                    dailyExecutionManager2.markExecuted2()
-                }
+//                    dailyExecutionManager2.markExecuted2()
+//                }
 
             }
 
@@ -160,10 +162,32 @@ class MainFragment : Fragment() {
                 .into(binding.profileimg)
 
         }
+//        val viewToAnimate: View = binding.point
+//
+//        val fadeInAnimator = ObjectAnimator.ofFloat(viewToAnimate, View.ALPHA, 0f, 1f)
+//        fadeInAnimator.duration = 500 // 1초 동안 애니메이션 진행
+//        fadeInAnimator.start()
+//
+//        fadeInAnimator.addListener(object : AnimatorListenerAdapter() {
+//            override fun onAnimationEnd(animation: Animator) {
+//                // 1초 동안 기다린 후에 fade out 애니메이션 적용
+//                viewToAnimate.postDelayed({
+//                    val fadeOutAnimator = ObjectAnimator.ofFloat(viewToAnimate, View.ALPHA, 1f, 0f)
+//                    fadeOutAnimator.duration = 500 // 1초 동안 애니메이션 진행
+//                    fadeOutAnimator.start()
+//
+//                    fadeOutAnimator.addListener(object : AnimatorListenerAdapter() {
+//                        override fun onAnimationEnd(animation: Animator) {
+//                            viewToAnimate.visibility = View.INVISIBLE
+//                        }
+//                    })
+//                }, 1000) // 1초 동안 기다림
+//            }
+//        })
 
-        binding.compare.text = "어제 사용량 : "+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 11)).toString() + "g"
+        binding.carbonReduce.text = "어제 사용량 : "+((changemb(DataProvider.getYesterdayUsage(requireContext())).toInt() * 11)).toString() + " g"
 
-        binding.compare2.text = "오늘 사용량 : "+((changemb(DataProvider.getDayUsage(requireContext())).toInt() * 11)).toString() + "g"
+        binding.compare2.text = ((changemb(DataProvider.getDayUsage(requireContext())).toInt() * 11)).toString() + " g"
 
     }
 
@@ -218,6 +242,7 @@ class MainFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
 
 //        updateusage()

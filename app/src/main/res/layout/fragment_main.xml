@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="820dp"
     tools:context=".fragment.MainFragment"
-    android:background="@color/gray1">
+    android:background="@color/white">
+
 
     <RelativeLayout
         android:id="@+id/messages_th"
@@ -16,12 +17,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/rectangle_2"
-        android:elevation="40dp"
+        android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
+
 
         <ImageView
             android:id="@+id/profileimg"
@@ -35,6 +37,7 @@
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="4dp" />
 
+
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="50dp"
@@ -47,6 +50,7 @@
             android:layout_marginBottom="4dp"
             android:src="@drawable/splash_logo" />
 
+
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
@@ -58,7 +62,11 @@
             android:text="오늘의 사용량"
             android:textColor="@color/black" />
 
+
     </RelativeLayout>
+
+
+
 
 
 
@@ -71,7 +79,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="100dp"
         android:background="@drawable/rectangle_2"
-        android:elevation="40dp"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -80,10 +88,25 @@
         tools:ignore="MissingClass">
 
 
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="2dp"
+
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="111dp"
+            android:background="@color/grayblack"
+            android:elevation="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/recivebtn"
+            app:layout_constraintEnd_toEndOf="@+id/recivebtn"
+            app:layout_constraintStart_toStartOf="@+id/recivebtn"
+            app:layout_constraintTop_toTopOf="@+id/compare2" />
+
         <android.widget.Button
             android:id="@+id/recivebtn"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="35dp"
@@ -93,39 +116,24 @@
             android:background="@drawable/ellipse_2"
             app:layout_constraintBottom_toBottomOf="@+id/carbon_progress"
             app:layout_constraintEnd_toEndOf="@+id/carbon_progress"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/carbon_progress"
             app:layout_constraintTop_toTopOf="@+id/carbon_progress"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.5" />
 
         <ProgressBar
             android:id="@+id/carbon_progress"
-            android:layout_width="240dp"
-            android:layout_height="240dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:layout_marginTop="16dp"
             android:adjustViewBounds="true"
             android:indeterminateOnly="false"
             android:progressDrawable="@drawable/circle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintHorizontal_bias="0.482"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:progress="60" />
 
-        <TextView
-            android:id="@+id/compare"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:elevation="10dp"
-            android:text="TextView"
-            android:textColor="@color/black"
-            android:textSize="15dp"
-            app:layout_constraintBottom_toBottomOf="@+id/recivebtn"
-            app:layout_constraintEnd_toEndOf="@+id/recivebtn"
-            app:layout_constraintHorizontal_bias="0.496"
-            app:layout_constraintStart_toStartOf="@+id/recivebtn"
-            app:layout_constraintTop_toTopOf="@+id/recivebtn"
-            app:layout_constraintVertical_bias="0.755" />
 
         <TextView
             android:id="@+id/compare2"
@@ -134,44 +142,100 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="63dp"
             android:layout_marginEnd="53dp"
-            android:layout_marginBottom="96dp"
+            android:layout_marginBottom="98dp"
+            android:elevation="10dp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/recivebtn"
+            app:layout_constraintEnd_toEndOf="@+id/recivebtn"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="@+id/recivebtn"
+            app:layout_constraintTop_toTopOf="@+id/recivebtn"
+            app:layout_constraintVertical_bias="0.368" />
+
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="75dp"
+            android:layout_marginEnd="71dp"
+            android:layout_marginBottom="150dp"
+            android:elevation="10dp"
+            android:text="오늘 사용량"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/carbon_progress"
+            app:layout_constraintEnd_toEndOf="@+id/carbon_progress"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="@+id/carbon_progress"
+            app:layout_constraintTop_toTopOf="@+id/carbon_progress"
+            app:layout_constraintVertical_bias="0.231" />
+
+        <TextView
+            android:id="@+id/carbon_reduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:elevation="10dp"
             android:text="TextView"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/recivebtn"
             app:layout_constraintEnd_toEndOf="@+id/recivebtn"
+            app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="@+id/recivebtn"
-            app:layout_constraintTop_toTopOf="@+id/recivebtn" />
+            app:layout_constraintTop_toBottomOf="@+id/compare2" />
+
+        <TextView
+            android:id="@+id/textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="46dp"
+            android:layout_marginBottom="86dp"
+            android:elevation="10dp"
+            android:text="전일 대비 -19744g 감축"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/carbon_progress"
+            app:layout_constraintEnd_toEndOf="@+id/carbon_progress"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="@+id/carbon_progress"
+            app:layout_constraintTop_toBottomOf="@+id/compare2"
+            app:layout_constraintVertical_bias="0.276" />
 
         <TextView
             android:id="@+id/point"
             android:layout_width="205dp"
             android:layout_height="38dp"
-            android:layout_marginTop="32dp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_marginBottom="590dp"
             android:text=""
             android:textColor="@color/black"
             android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/slide_view"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.988"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recivebtn" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:alpha="1"
+            app:layout_constraintVertical_bias="1.0" />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="49dp"
-            android:layout_height="37dp"
-            android:minWidth="50dp"
-            android:minHeight="50dp"
-            app:layout_constraintBottom_toBottomOf="@+id/point"
-            app:layout_constraintEnd_toEndOf="@+id/point"
-            app:layout_constraintStart_toStartOf="@+id/point"
-            app:layout_constraintTop_toTopOf="@+id/point" />
 
-        //////////////////////////////////////////////////////////////////////
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/slide_view"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_alignParentTop="true"
             android:background="@drawable/rectangle_3"
@@ -180,6 +244,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints">
+
 
             <ImageView
                 android:id="@+id/imageView12"
@@ -193,11 +258,15 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.15" />
+                app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
